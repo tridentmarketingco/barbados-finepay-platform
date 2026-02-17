@@ -1,0 +1,234 @@
+/**
+ * Input Component Styles
+ * Consistent form input styling with validation states
+ * Full Light/Dark Mode Support
+ */
+
+/* ============================================================================
+   CSS CUSTOM PROPERTIES
+   ============================================================================ */
+
+:root {
+  --input-bg: var(--white, #ffffff);
+  --input-bg-disabled: var(--light-gray, #f8f9fa);
+  --input-border: var(--border-color, #dee2e6);
+  --input-border-hover: var(--dark-gray, #495057);
+  --input-focus: var(--primary-blue, #003f87);
+  --input-text: var(--text-dark, #212529);
+  --input-placeholder: #adb5bd;
+  --input-error: var(--danger-red, #dc3545);
+  --input-success: var(--success-green, #28a745);
+}
+
+html.dark {
+  --input-bg: var(--bg-secondary, #1e293b);
+  --input-bg-disabled: var(--bg-tertiary, #334155);
+  --input-border: rgba(255, 255, 255, 0.1);
+  --input-border-hover: rgba(255, 255, 255, 0.2);
+  --input-focus: var(--primary-gold, #ffc72c);
+  --input-text: var(--text-primary, #f8fafc);
+  --input-placeholder: var(--text-muted, #94a3b8);
+}
+
+.input-group {
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.input-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-dark, #212529);
+  font-size: 0.95rem;
+}
+
+html.dark .input-label {
+  color: var(--text-secondary, #e2e8f0);
+}
+
+.input-required {
+  color: var(--danger-red, #dc3545);
+  margin-left: 0.25rem;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-field {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--input-border);
+  border-radius: 16px;
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: 500;
+  color: var(--input-text);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px) saturate(1.1);
+  -webkit-backdrop-filter: blur(12px) saturate(1.1);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  letter-spacing: -0.01em;
+  text-rendering: optimizeLegibility;
+  box-shadow: 0 2px 8px rgba(0, 63, 135, 0.08);
+}
+
+html.dark .input-field {
+  border-color: var(--border-default, rgba(255, 255, 255, 0.1));
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--input-focus);
+  box-shadow: 0 0 0 3px rgba(0, 63, 135, 0.1), 0 4px 16px rgba(0, 63, 135, 0.15);
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(16px) saturate(1.15);
+  -webkit-backdrop-filter: blur(16px) saturate(1.15);
+}
+
+html.dark .input-field {
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(12px) saturate(1.1);
+  -webkit-backdrop-filter: blur(12px) saturate(1.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+html.dark .input-field:focus {
+  box-shadow: 0 0 0 3px rgba(255, 199, 44, 0.15), 0 4px 16px rgba(255, 199, 44, 0.2);
+  background: rgba(30, 41, 59, 0.8);
+  backdrop-filter: blur(16px) saturate(1.15);
+  -webkit-backdrop-filter: blur(16px) saturate(1.15);
+}
+
+.input-field::placeholder {
+  color: var(--input-placeholder);
+}
+
+html.dark .input-field::placeholder {
+  color: var(--text-muted, #94a3b8);
+}
+
+.input-field:disabled {
+  background-color: var(--input-bg-disabled);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+html.dark .input-field:disabled {
+  background-color: var(--bg-tertiary, #334155);
+}
+
+.input-field:read-only {
+  background-color: var(--input-bg-disabled);
+  cursor: default;
+}
+
+html.dark .input-field:read-only {
+  background-color: var(--bg-tertiary, #334155);
+}
+
+/* Input with Icon */
+.input-with-icon {
+  padding-left: 3rem;
+}
+
+.input-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--dark-gray, #495057);
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+
+html.dark .input-icon {
+  color: var(--text-muted, #94a3b8);
+}
+
+/* Error State */
+.input-error {
+  border-color: var(--input-error);
+}
+
+html.dark .input-error {
+  border-color: var(--danger-red, #dc3545);
+}
+
+.input-error:focus {
+  border-color: var(--input-error);
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+html.dark .input-error:focus {
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15);
+}
+
+.input-error-message {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--input-error);
+}
+
+/* Helper Text */
+.input-helper-text {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--dark-gray, #495057);
+}
+
+html.dark .input-helper-text {
+  color: var(--text-muted, #94a3b8);
+}
+
+/* Valid State */
+.input-field:valid:not(:placeholder-shown):not(:focus) {
+  border-color: var(--input-success);
+}
+
+html.dark .input-field:valid:not(:placeholder-shown):not(:focus) {
+  border-color: var(--success-green, #28a745);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .input-field {
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: 0.85rem 1rem;
+  }
+
+  .input-with-icon {
+    padding-left: 2.75rem;
+  }
+
+  .input-icon {
+    left: 0.85rem;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .input-group {
+    margin-bottom: 1.25rem;
+  }
+
+  .input-label {
+    font-size: 0.9rem;
+  }
+
+  .input-field {
+    padding: 0.75rem 0.85rem;
+    font-size: 15px;
+  }
+
+  .input-error-message,
+  .input-helper-text {
+    font-size: 0.8rem;
+  }
+}

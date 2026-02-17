@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Barbados Government Colors -->
+    <color name="primary">#003f87</color>
+    <color name="primary_dark">#002855</color>
+    <color name="secondary">#ffc72c</color>
+    <color name="secondary_dark">#cc9f23</color>
+    
+    <!-- Standard colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="gray">#808080</color>
+    <color name="light_gray">#E0E0E0</color>
+</resources>

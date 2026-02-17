@@ -1,0 +1,2038 @@
+/**
+ * Barbados PayFine Platform - Main Styles
+ * Clean, professional design with Barbados national colors
+ * Full Light/Dark Mode Support
+ */
+
+/* ============================================================================
+   CSS CUSTOM PROPERTIES - BRAND COLORS (PRESERVED EXACTLY)
+   ============================================================================ */
+
+:root {
+  /* Deep Space Blue Theme - Modern Flat Design */
+  --primary-blue: #102B3F;
+  --primary-gold: #ffc72c;
+  --dark-blue: #0a1929;
+  --light-blue: #1a3a52;
+  --success-green: #28a745;
+  --danger-red: #dc3545;
+  --warning-orange: #fd7e14;
+  --light-gray: #f8f9fa;
+  --medium-gray: #e9ecef;
+  --dark-gray: #495057;
+  --white: #ffffff;
+  --text-dark: #212529;
+  --border-color: #dee2e6;
+}
+
+/* ============================================================================
+   LIGHT MODE (DEFAULT) - CSS CUSTOM PROPERTIES
+   ============================================================================ */
+
+:root {
+  /* Background Colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #e9ecef;
+  --bg-card: rgba(255, 255, 255, 0.7);
+  
+  /* Text Colors */
+  --text-primary: #212529;
+  --text-secondary: #495057;
+  --text-muted: #6c757d;
+  --text-inverse: #ffffff;
+  
+  /* Border Colors */
+  --border-light: rgba(0, 0, 0, 0.08);
+  --border-default: #dee2e6;
+  --border-focus: rgba(0, 63, 135, 0.25);
+  
+  /* Shadow Colors */
+  --shadow-sm: rgba(0, 0, 0, 0.06);
+  --shadow-md: rgba(0, 0, 0, 0.1);
+  --shadow-lg: rgba(0, 0, 0, 0.15);
+  
+  /* Overlay Colors */
+  --overlay-light: rgba(255, 255, 255, 0.9);
+  --overlay-dark: rgba(0, 0, 0, 0.5);
+  
+  /* Status Colors */
+  --status-success-bg: rgba(40, 167, 69, 0.1);
+  --status-success-text: #155724;
+  --status-error-bg: rgba(220, 53, 69, 0.1);
+  --status-error-text: #721c24;
+  --status-warning-bg: rgba(253, 126, 20, 0.1);
+  --status-warning-text: #856404;
+  --status-info-bg: rgba(74, 144, 226, 0.1);
+  --status-info-text: #0c5460;
+}
+
+/* ============================================================================
+   DARK MODE - CSS CUSTOM PROPERTIES
+   ============================================================================ */
+
+html.dark {
+  --light-gray: #020817;
+  --medium-gray: #1e293b;
+  --white: #0f172a;
+
+  /* Background Colors */
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
+  --bg-card: rgba(30, 41, 59, 0.65);
+
+  /* Text Colors */
+  --text-primary: #f8fafc;
+  --text-secondary: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-inverse: #0f172a;
+
+  /* Border Colors */
+  --border-light: rgba(255, 255, 255, 0.08);
+  --border-default: rgba(255, 255, 255, 0.1);
+  --border-focus: rgba(255, 199, 44, 0.4);
+
+  /* Shadow Colors */
+  --shadow-sm: rgba(0, 0, 0, 0.2);
+  --shadow-md: rgba(0, 0, 0, 0.3);
+  --shadow-lg: rgba(0, 0, 0, 0.4);
+
+  /* Overlay Colors */
+  --overlay-light: rgba(30, 41, 59, 0.95);
+  --overlay-dark: rgba(0, 0, 0, 0.7);
+
+  /* Status Colors - Adjusted for dark backgrounds */
+  --status-success-bg: rgba(40, 167, 69, 0.15);
+  --status-success-text: #a3d9a5;
+  --status-error-bg: rgba(220, 53, 69, 0.15);
+  --status-error-text: #f8b4b9;
+  --status-warning-bg: rgba(253, 126, 20, 0.15);
+  --status-warning-text: #fcd34d;
+  --status-info-bg: rgba(74, 144, 226, 0.15);
+  --status-info-text: #93c5fd;
+}
+
+html.dark body {
+  background: #020817;
+  color: #e2e8f0;
+}
+
+/* Dark Mode - Enhanced Glassmorphism */
+html.dark .card,
+html.dark [class*="card"],
+html.dark .receipt-body,
+html.dark .receipt-header,
+html.dark [class*="receipt"],
+html.dark .ticket-details,
+html.dark .error-boundary-content {
+  background: rgba(15, 23, 42, 0.65) !important;
+  backdrop-filter: blur(28px) saturate(1.2);
+  -webkit-backdrop-filter: blur(28px) saturate(1.2);
+  border-color: rgba(255,255,255,0.09);
+  box-shadow: 0 12px 48px rgba(0,0,0,0.5);
+}
+
+html.dark .alert,
+html.dark [class*="alert"] {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+html.dark .notification,
+html.dark [class*="notification"] {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+html.dark .btn-primary {
+  background: #3b82f6;
+}
+
+/* ============================================================================
+   GLOBAL TRANSITIONS
+   ============================================================================ */
+
+*,
+*::before,
+*::after {
+  transition: 
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* ============================================================================
+   GLOBAL STYLES - ENHANCED 2025-2026
+   ============================================================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-rendering: optimizeLegibility;
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-primary);
+}
+
+/* Main content area - add top padding to account for sticky header */
+.App > div:not(.app-header) {
+  flex: 1;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+}
+
+/* Header Styles */
+.app-header {
+  background: var(--primary-blue);
+  color: var(--white);
+  padding: 1.5rem 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.logo-section h1 {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+  font-weight: 700;
+}
+
+.tagline {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  font-weight: 300;
+}
+
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-name {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 2rem 0;
+}
+
+/* Card Styles - PREMIUM SUPAUI GLASSMORPHISM */
+.card,
+[class*="card"] {
+  background: rgba(255, 255, 255, 0.55) !important;
+  backdrop-filter: blur(24px) saturate(1.15);
+  -webkit-backdrop-filter: blur(24px) saturate(1.15);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 28px;
+  box-shadow: 0 12px 48px rgba(0, 63, 135, 0.18), 0 4px 16px rgba(0, 0, 0, 0.06);
+  padding: 2.5rem 2rem;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before,
+[class*="card"]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 199, 44, 0.3), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover,
+[class*="card"]:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 72px rgba(0, 63, 135, 0.28), 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover::before,
+[class*="card"]:hover::before {
+  opacity: 1;
+}
+
+.card-header {
+  background: var(--primary-blue) !important;
+  border-radius: 28px 28px 0 0;
+  border-bottom: none;
+  position: relative;
+  padding: 2.5rem 2rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.card-header::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 2rem;
+  width: 80px;
+  height: 4px;
+  background: var(--primary-gold);
+  border-radius: 2px;
+}
+
+.card-header h2 {
+  color: var(--white);
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.card-header p {
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  font-size: 0.95rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(0, 63, 135, 0.1);
+}
+
+.form-group input::placeholder {
+  color: #adb5bd;
+}
+
+/* Button Styles - PREMIUM GRADIENTS & FLOATING */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 16px rgba(0, 63, 135, 0.2);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--primary-blue);
+  color: var(--white);
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 32px rgba(0, 63, 135, 0.3);
+}
+
+.btn-success {
+  background: var(--success-green);
+  color: var(--white);
+}
+
+.btn-secondary {
+  background: var(--medium-gray);
+  color: var(--text-dark);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--border-color);
+}
+
+.btn-warden {
+  background: #f5576c;
+  color: var(--white);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  border: none;
+}
+
+.btn-warden:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(240, 147, 251, 0.4);
+}
+
+.btn-admin {
+  background: var(--primary-gold);
+  color: var(--dark-blue);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  border: none;
+}
+
+.btn-admin:hover {
+  background: #ffb300;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 193, 7, 0.3);
+}
+
+.btn-logout {
+  background: transparent;
+  border: 2px solid var(--white);
+  color: var(--white);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-logout:hover {
+  background: var(--white);
+  color: var(--primary-blue);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* Alert Styles - Minimalist (handled by Alert.css) */
+.alert,
+[class*="alert"] {
+  /* Styles defined in frontend/src/components/common/Alert.css */
+}
+
+/* Ticket Details - PREMIUM SUPAUI GLASSMORPHISM */
+.ticket-details {
+  background: rgba(255, 255, 255, 0.55) !important;
+  backdrop-filter: blur(24px) saturate(1.15);
+  -webkit-backdrop-filter: blur(24px) saturate(1.15);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 28px;
+  box-shadow: 0 12px 48px rgba(0, 63, 135, 0.18), 0 4px 16px rgba(0, 0, 0, 0.06);
+  padding: 2.5rem 2rem;
+  margin: 1.5rem 0;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.ticket-details::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 199, 44, 0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ticket-details:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 72px rgba(0, 63, 135, 0.28), 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.ticket-details:hover::before {
+  opacity: 1;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #102B3F;
+}
+
+.detail-value {
+  color: var(--text-dark);
+  text-align: right;
+}
+
+.amount-highlight, .receipt-total-amount {
+  color: var(--primary-blue);
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.45rem 1.2rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.status-badge:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 32px rgba(0, 63, 135, 0.3);
+}
+
+.status-unpaid {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-paid {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-overdue {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.status-Challenged {
+  background: #e7f3ff;
+  color: #004085;
+}
+
+.status-Payable {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.status-Adjusted {
+  background: #cfe2ff;
+  color: #084298;
+}
+
+.status-Dismissed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-Pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-UnderReview {
+  background: #e7f3ff;
+  color: #004085;
+}
+
+.status-Approved {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-Rejected {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* Receipt Styles */
+.receipt-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.receipt-header {
+  text-align: center;
+  padding: 2.5rem 2rem;
+  background: var(--primary-blue);
+  color: var(--white);
+  border-radius: 28px 28px 0 0;
+  position: relative;
+}
+
+.receipt-header::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 2rem;
+  width: 80px;
+  height: 4px;
+  background: var(--primary-gold);
+  border-radius: 2px;
+}
+
+.receipt-header h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.receipt-number {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.receipt-body,
+[class*="receipt"] {
+  background: rgba(255, 255, 255, 0.55) !important;
+  backdrop-filter: blur(24px) saturate(1.15);
+  -webkit-backdrop-filter: blur(24px) saturate(1.15);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 0 0 28px 28px;
+  box-shadow: 0 12px 48px rgba(0, 63, 135, 0.18), 0 4px 16px rgba(0, 0, 0, 0.06);
+  padding: 2.5rem 2rem;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.receipt-body::before,
+[class*="receipt"]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 199, 44, 0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.receipt-body:hover,
+[class*="receipt"]:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 72px rgba(0, 63, 135, 0.28), 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.receipt-body:hover::before,
+[class*="receipt"]:hover::before {
+  opacity: 1;
+}
+
+.receipt-section {
+  margin-bottom: 2rem;
+}
+
+.receipt-section h3 {
+  color: #102B3F;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  border-bottom: 2px solid var(--primary-gold);
+  padding-bottom: 0.5rem;
+}
+
+.receipt-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.receipt-item {
+  padding: 0.75rem;
+  background: var(--light-gray);
+  border-radius: 6px;
+}
+
+.receipt-item-label {
+  font-size: 0.85rem;
+  color: var(--dark-gray);
+  margin-bottom: 0.25rem;
+}
+
+.receipt-item-value {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.receipt-total {
+  background: var(--primary-blue);
+  color: var(--white);
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.receipt-total-label {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.9;
+}
+
+.receipt-total-amount {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.receipt-note {
+  background: #fff3cd;
+  border-left: 4px solid var(--warning-orange);
+  padding: 1rem;
+  border-radius: 6px;
+  margin-top: 2rem;
+}
+
+.receipt-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Footer Styles */
+.app-footer {
+  background: var(--dark-blue);
+  color: var(--white);
+  padding: 2rem 0 1rem;
+  margin-top: auto;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-section h4 {
+  color: var(--primary-gold);
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.footer-section p {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1rem;
+  text-align: center;
+}
+
+.footer-bottom p {
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.disclaimer {
+  font-size: 0.8rem !important;
+  font-style: italic;
+}
+
+/* Loading Spinner */
+.loading {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: var(--white);
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN - EXECUTIVE LEVEL
+   ============================================================================ */
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced Focus States for Accessibility */
+*:focus-visible {
+  outline: 3px solid var(--primary-gold);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Large Desktop (1440px+) */
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1400px;
+  }
+  
+  .logo-section h1 {
+    font-size: 2.25rem;
+  }
+  
+  .card-header h2 {
+    font-size: 2rem;
+  }
+  
+  .receipt-total-amount {
+    font-size: 3rem;
+  }
+}
+
+/* Desktop (1024px - 1439px) */
+@media (max-width: 1439px) {
+  .container {
+    max-width: 1200px;
+  }
+}
+
+/* Tablet Landscape (1024px) */
+@media (max-width: 1024px) {
+  .container {
+    max-width: 960px;
+    padding: 0 24px;
+  }
+  
+  .logo-section h1 {
+    font-size: 1.75rem;
+  }
+  
+  .card {
+    padding: 1.75rem;
+  }
+  
+  .receipt-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablet Portrait (768px) */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 20px;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.25rem;
+  }
+  
+  .logo-section h1 {
+    font-size: 1.5rem;
+  }
+  
+  .tagline {
+    font-size: 0.85rem;
+  }
+  
+  .user-section {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+  
+  .user-name {
+    font-size: 0.9rem;
+  }
+  
+  .btn-warden,
+  .btn-admin,
+  .btn-logout {
+    width: 100%;
+    justify-content: center;
+    padding: 0.65rem 1.25rem;
+  }
+  
+  .card {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .card-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .form-group input {
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: 0.85rem 1rem;
+  }
+  
+  .btn {
+    min-height: 44px; /* Touch-friendly */
+    padding: 0.85rem 1.5rem;
+  }
+  
+  .amount-highlight {
+    font-size: 1.75rem;
+  }
+  
+  .detail-row {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem 0;
+  }
+  
+  .detail-label,
+  .detail-value {
+    text-align: left;
+  }
+  
+  .receipt-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .receipt-number {
+    font-size: 1rem;
+  }
+  
+  .receipt-body {
+    padding: 1.5rem;
+  }
+  
+  .receipt-total-amount {
+    font-size: 2rem;
+  }
+  
+  .receipt-actions {
+    flex-direction: column;
+  }
+  
+  .receipt-actions .btn {
+    width: 100%;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1.5rem;
+  }
+  
+  .footer-section h4 {
+    font-size: 1rem;
+  }
+  
+  .footer-section p {
+    font-size: 0.85rem;
+  }
+}
+
+/* Mobile Landscape & Small Tablet (640px) */
+@media (max-width: 640px) {
+  .app-header {
+    padding: 1.25rem 0;
+  }
+  
+  .logo-section h1 {
+    font-size: 1.35rem;
+  }
+  
+  .main-content {
+    padding: 1.5rem 0;
+  }
+  
+  .card {
+    padding: 1.25rem;
+    border-radius: 10px;
+  }
+  
+  .card-header {
+    padding-bottom: 0.85rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .card-header h2 {
+    font-size: 1.35rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1.25rem;
+  }
+  
+  .btn {
+    font-size: 0.95rem;
+  }
+  
+  .ticket-details {
+    padding: 1.25rem;
+  }
+  
+  .receipt-header {
+    padding: 1.5rem;
+  }
+  
+  .receipt-body {
+    padding: 1.25rem;
+  }
+  
+  .receipt-section {
+    margin-bottom: 1.5rem;
+  }
+  
+  .receipt-total {
+    padding: 1.25rem;
+  }
+}
+
+/* Mobile Portrait (480px) */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
+  
+  .app-header {
+    padding: 1rem 0;
+  }
+  
+  .logo-section h1 {
+    font-size: 1.25rem;
+    margin-bottom: 0.15rem;
+  }
+  
+  .tagline {
+    font-size: 0.8rem;
+  }
+  
+  .user-section {
+    gap: 0.5rem;
+  }
+  
+  .btn-warden,
+  .btn-admin {
+    font-size: 0.85rem;
+    padding: 0.6rem 1rem;
+  }
+  
+  .btn-logout {
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  .main-content {
+    padding: 1.25rem 0;
+  }
+  
+  .card {
+    padding: 1rem;
+    border-radius: 8px;
+  }
+  
+  .card-header h2 {
+    font-size: 1.25rem;
+  }
+  
+  .card-header p {
+    font-size: 0.9rem;
+  }
+  
+  .form-group label {
+    font-size: 0.9rem;
+  }
+  
+  .form-group input {
+    padding: 0.75rem 0.85rem;
+  }
+  
+  .btn {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+  }
+  
+  .amount-highlight {
+    font-size: 1.5rem;
+  }
+  
+  .status-badge {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+  }
+  
+  .alert {
+    padding: 0.85rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .receipt-container {
+    margin: 0 -16px;
+  }
+  
+  .receipt-header {
+    padding: 1.25rem;
+    border-radius: 0;
+  }
+  
+  .receipt-header h2 {
+    font-size: 1.35rem;
+  }
+  
+  .receipt-number {
+    font-size: 0.95rem;
+  }
+  
+  .receipt-body {
+    padding: 1rem;
+  }
+  
+  .receipt-section h3 {
+    font-size: 1.1rem;
+  }
+  
+  .receipt-grid {
+    gap: 0.75rem;
+  }
+  
+  .receipt-item {
+    padding: 0.65rem;
+  }
+  
+  .receipt-item-label {
+    font-size: 0.8rem;
+  }
+  
+  .receipt-item-value {
+    font-size: 0.95rem;
+  }
+  
+  .receipt-total {
+    padding: 1rem;
+    margin: 1.5rem 0;
+  }
+  
+  .receipt-total-label {
+    font-size: 0.9rem;
+  }
+  
+  .receipt-total-amount {
+    font-size: 1.85rem;
+  }
+  
+  .receipt-note {
+    padding: 0.85rem;
+    font-size: 0.85rem;
+  }
+  
+  .receipt-actions {
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  
+  .app-footer {
+    padding: 1.5rem 0 0.75rem;
+  }
+  
+  .footer-content {
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .footer-section h4 {
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .footer-section p {
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+  }
+  
+  .footer-bottom p {
+    font-size: 0.8rem;
+  }
+  
+  .disclaimer {
+    font-size: 0.75rem !important;
+  }
+}
+
+/* Extra Small Mobile (375px) */
+@media (max-width: 375px) {
+  .logo-section h1 {
+    font-size: 1.1rem;
+  }
+  
+  .tagline {
+    font-size: 0.75rem;
+  }
+  
+  .card {
+    padding: 0.85rem;
+  }
+  
+  .card-header h2 {
+    font-size: 1.15rem;
+  }
+  
+  .form-group input {
+    padding: 0.7rem 0.75rem;
+    font-size: 15px;
+  }
+  
+  .btn {
+    padding: 0.7rem 1rem;
+    font-size: 0.85rem;
+  }
+  
+  .amount-highlight {
+    font-size: 1.35rem;
+  }
+  
+  .receipt-header h2 {
+    font-size: 1.25rem;
+  }
+  
+  .receipt-total-amount {
+    font-size: 1.65rem;
+  }
+}
+
+/* Landscape Orientation Adjustments */
+@media (max-height: 600px) and (orientation: landscape) {
+  .app-header {
+    padding: 0.75rem 0;
+  }
+  
+  .main-content {
+    padding: 1rem 0;
+  }
+  
+  .card {
+    margin-bottom: 1rem;
+  }
+  
+  .app-footer {
+    padding: 1rem 0 0.5rem;
+  }
+  
+  .footer-content {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .app-header,
+  .app-footer,
+  .receipt-actions,
+  .btn,
+  .user-section {
+    display: none !important;
+  }
+  
+  .receipt-container {
+    max-width: 100%;
+    margin: 0;
+  }
+  
+  .receipt-header {
+    border-radius: 0;
+    page-break-inside: avoid;
+  }
+  
+  .receipt-body {
+    page-break-inside: avoid;
+  }
+  
+  .card {
+    box-shadow: none;
+    border: 1px solid #ddd;
+    page-break-inside: avoid;
+  }
+  
+  body {
+    background: white;
+  }
+}
+
+/* ============================================================================
+   EXECUTIVE-LEVEL ENHANCEMENTS
+   ============================================================================ */
+
+/* Smooth Transitions */
+.btn,
+.card,
+.form-group input,
+.form-group textarea,
+.form-group select,
+.status-badge {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced Card Shadows */
+.card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Enhanced Button Interactions */
+.btn:not(:disabled):active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Loading State Enhancement */
+.loading {
+  animation: spin 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Fade-in Animation for Content */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Alert animation handled by Alert.css */
+
+/* Enhanced Input Focus */
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  transform: translateY(-1px);
+}
+
+/* Better Status Badge Visibility */
+.status-badge {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhanced Alert Styling - Handled by Alert.css */
+
+/* Improved Receipt Styling */
+.receipt-header {
+  box-shadow: 0 4px 12px rgba(0, 63, 135, 0.2);
+}
+
+.receipt-total {
+  box-shadow: 0 4px 12px rgba(0, 63, 135, 0.15);
+}
+
+/* Better Footer Styling */
+.app-footer {
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Skeleton Loading (for future use) */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--light-gray) 0%,
+    var(--medium-gray) 50%,
+    var(--light-gray) 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Improved Accessibility */
+.btn:focus-visible,
+.form-group input:focus-visible,
+.form-group textarea:focus-visible,
+.form-group select:focus-visible {
+  outline: 3px solid var(--primary-gold);
+  outline-offset: 2px;
+}
+
+/* Better Link Styling */
+a {
+  transition: all 0.2s ease;
+}
+
+a:focus-visible {
+  outline: 3px solid var(--primary-gold);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Enhanced Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+/* Better Spacing System */
+.card + .card {
+  margin-top: 0;
+}
+
+/* Improved Error States */
+.form-group input:invalid:not(:placeholder-shown) {
+  border-color: var(--danger-red);
+}
+
+.form-group input:valid:not(:placeholder-shown) {
+  border-color: var(--success-green);
+}
+
+/* Enhanced Hover States */
+.detail-row:hover {
+  background: rgba(0, 63, 135, 0.02);
+  border-radius: 4px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+}
+
+/* Better Visual Hierarchy */
+.card-header {
+  position: relative;
+}
+
+.card-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: var(--primary-gold);
+  border-radius: 2px;
+}
+
+/* ============================================================================
+   NOTIFICATION SYSTEM - MINIMALIST
+   ============================================================================ */
+
+.notification-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 400px;
+  pointer-events: none;
+}
+
+.notification {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  pointer-events: all;
+  animation: fadeIn 0.2s ease;
+  min-width: 280px;
+}
+
+.notification-success {
+  background: #d4edda;
+  border-color: #28a745;
+  color: #155724;
+}
+
+.notification-error {
+  background: #f8d7da;
+  border-color: #dc3545;
+  color: #721c24;
+}
+
+.notification-warning {
+  background: #fff3cd;
+  border-color: #fd7e14;
+  color: #856404;
+}
+
+.notification-info {
+  background: #d1ecf1;
+  border-color: #4a90e2;
+  color: #0c5460;
+}
+
+.notification-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.notification-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.notification-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.notification-message {
+  font-size: 0.85rem;
+  line-height: 1.3;
+}
+
+.notification-close {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0;
+  color: inherit;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.notification-close:hover {
+  opacity: 1;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ============================================================================
+   ERROR BOUNDARY
+   ============================================================================ */
+
+.error-boundary {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: var(--light-gray);
+}
+
+.error-boundary-content {
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.55) !important;
+  backdrop-filter: blur(24px) saturate(1.15);
+  -webkit-backdrop-filter: blur(24px) saturate(1.15);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 28px;
+  box-shadow: 0 12px 48px rgba(0, 63, 135, 0.18), 0 4px 16px rgba(0, 0, 0, 0.06);
+  padding: 3rem;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.error-boundary-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 199, 44, 0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.error-boundary-content:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 72px rgba(0, 63, 135, 0.28), 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.error-boundary-content:hover::before {
+  opacity: 1;
+}
+
+.error-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+}
+
+.error-boundary-content h1 {
+  color: var(--primary-blue);
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.error-message {
+  color: var(--dark-gray);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.error-details {
+  margin: 2rem 0;
+  text-align: left;
+}
+
+.error-details summary {
+  cursor: pointer;
+  padding: 0.75rem;
+  background: var(--light-gray);
+  border-radius: 6px;
+  font-weight: 600;
+  color: var(--primary-blue);
+}
+
+.error-stack {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.error-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.error-support {
+  font-size: 0.9rem;
+  color: var(--dark-gray);
+}
+
+.error-support a {
+  color: var(--primary-blue);
+  text-decoration: none;
+}
+
+.error-support a:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================================
+   LOADING STATES
+   ============================================================================ */
+
+.route-loading {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(0, 63, 135, 0.1);
+  border-radius: 50%;
+  border-top-color: var(--primary-blue);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================================================
+   RESPONSIVE NOTIFICATIONS
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  .notification-container {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    max-width: none;
+  }
+
+  .notification {
+    min-width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .error-boundary-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .error-icon {
+    font-size: 3rem;
+  }
+
+  .error-boundary-content h1 {
+    font-size: 1.5rem;
+  }
+
+  .error-actions {
+    flex-direction: column;
+  }
+
+  .error-actions .btn {
+    width: 100%;
+  }
+}
+
+/* ============================================================================
+   DARK MODE COMPONENT STYLES
+   ============================================================================ */
+
+/* Dark Mode - Header */
+html.dark .app-header {
+  background: #0a1929;
+  border-bottom-color: rgba(255, 199, 44, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+html.dark .logo-section h1 {
+  color: #ffffff;
+}
+
+html.dark .tagline {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+html.dark .user-name {
+  color: #ffffff;
+}
+
+/* Dark Mode - Cards */
+html.dark .card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+html.dark .card-header {
+  border-bottom-color: rgba(255, 199, 44, 0.3);
+  background: linear-gradient(135deg, rgba(0, 63, 135, 0.05) 0%, transparent 100%);
+}
+
+html.dark .card-header h2 {
+  color: #f8fafc;
+}
+
+html.dark .card-header p {
+  color: var(--text-muted);
+}
+
+/* Dark Mode - Form Groups */
+html.dark .form-group label {
+  color: var(--text-secondary);
+}
+
+html.dark .form-group input {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-default);
+  color: var(--text-primary);
+}
+
+html.dark .form-group input:focus {
+  border-color: var(--primary-gold);
+  box-shadow: 0 0 0 3px rgba(255, 199, 44, 0.15);
+}
+
+html.dark .form-group input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Dark Mode - Secondary Buttons */
+html.dark .btn-secondary {
+  background: linear-gradient(135deg, #374151 0%, #4b5563 50%, #374151 100%);
+  color: #f3f4f6;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+html.dark .btn-secondary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #4b5563 0%, #6b7280 50%, #4b5563 100%);
+}
+
+/* Dark Mode - Logout Button */
+html.dark .btn-logout {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+html.dark .btn-logout:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Dark Mode - Alerts */
+html.dark .alert-success {
+  background: rgba(40, 167, 69, 0.15);
+  color: #a3d9a5;
+  border-color: rgba(40, 167, 69, 0.3);
+}
+
+html.dark .alert-error {
+  background: rgba(220, 53, 69, 0.15);
+  color: #f8b4b9;
+  border-color: rgba(220, 53, 69, 0.3);
+}
+
+html.dark .alert-warning {
+  background: rgba(253, 126, 20, 0.15);
+  color: #fcd34d;
+  border-color: rgba(253, 126, 20, 0.3);
+}
+
+html.dark .alert-info {
+  background: rgba(74, 144, 226, 0.15);
+  color: #93c5fd;
+  border-color: rgba(74, 144, 226, 0.3);
+}
+
+/* Dark Mode - Ticket Details */
+html.dark .ticket-details {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-default);
+}
+
+html.dark .detail-label {
+  color: var(--text-muted);
+}
+
+html.dark .detail-value {
+  color: var(--text-primary);
+}
+
+/* Dark Mode - Status Badges */
+html.dark .status-unpaid {
+  background: rgba(253, 126, 20, 0.2);
+  color: #fcd34d;
+}
+
+html.dark .status-paid {
+  background: rgba(40, 167, 69, 0.2);
+  color: #a3d9a5;
+}
+
+html.dark .status-overdue {
+  background: rgba(220, 53, 69, 0.2);
+  color: #f8b4b9;
+}
+
+html.dark .status-Challenged,
+html.dark .status-UnderReview {
+  background: rgba(74, 144, 226, 0.2);
+  color: #93c5fd;
+}
+
+html.dark .status-Payable,
+html.dark .status-Pending {
+  background: rgba(253, 126, 20, 0.2);
+  color: #fcd34d;
+}
+
+html.dark .status-Adjusted,
+html.dark .status-Approved {
+  background: rgba(40, 167, 69, 0.2);
+  color: #a3d9a5;
+}
+
+html.dark .status-Dismissed {
+  background: rgba(40, 167, 69, 0.2);
+  color: #a3d9a5;
+}
+
+html.dark .status-Rejected {
+  background: rgba(220, 53, 69, 0.2);
+  color: #f8b4b9;
+}
+
+/* Dark Mode - Receipt */
+html.dark .receipt-item {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-default);
+}
+
+html.dark .receipt-item-label {
+  color: var(--text-muted);
+}
+
+html.dark .receipt-item-value {
+  color: var(--text-primary);
+}
+
+html.dark .receipt-note {
+  background: rgba(253, 126, 20, 0.15);
+  border-left-color: var(--warning-orange);
+  color: #fcd34d;
+}
+
+/* Dark Mode - Footer */
+html.dark .app-footer {
+  background: #0f172a;
+  border-top: 1px solid var(--border-default);
+}
+
+html.dark .footer-section h4 {
+  color: var(--primary-gold);
+}
+
+html.dark .footer-section p {
+  color: var(--text-muted);
+}
+
+/* Dark Mode - Notifications */
+html.dark .notification {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+html.dark .notification-success {
+  background: rgba(40, 167, 69, 0.2);
+  border-color: #4ade80;
+  color: #a3d9a5;
+}
+
+html.dark .notification-error {
+  background: rgba(220, 53, 69, 0.2);
+  border-color: #f87171;
+  color: #f8b4b9;
+}
+
+html.dark .notification-warning {
+  background: rgba(253, 126, 20, 0.2);
+  border-color: #fbbf24;
+  color: #fcd34d;
+}
+
+html.dark .notification-info {
+  background: rgba(74, 144, 226, 0.2);
+  border-color: #60a5fa;
+  color: #93c5fd;
+}
+
+/* Dark Mode - Error Boundary */
+html.dark .error-boundary {
+  background: var(--bg-secondary);
+}
+
+html.dark .error-boundary-content {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+}
+
+html.dark .error-boundary-content h1 {
+  color: #f8fafc;
+}
+
+html.dark .error-message {
+  color: var(--text-muted);
+}
+
+html.dark .error-support {
+  color: var(--text-muted);
+}
+
+html.dark .error-support a {
+  color: var(--primary-gold);
+}
+
+/* Dark Mode - Loading States */
+html.dark .loading-spinner {
+  border-color: rgba(255, 255, 255, 0.1);
+  border-top-color: var(--primary-gold);
+}
+
+html.dark .skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-tertiary) 0%,
+    #475569 50%,
+    var(--bg-tertiary) 100%
+  );
+  background-size: 1000px 100%;
+}
+
+/* Dark Mode - Print */
+@media print {
+  html.dark body {
+    background: white;
+    color: black;
+  }
+  
+  html.dark .card,
+  html.dark .receipt-container {
+    background: white;
+    border: 1px solid #ddd;
+  }
+}

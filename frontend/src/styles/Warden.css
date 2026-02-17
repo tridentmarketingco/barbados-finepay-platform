@@ -1,0 +1,1625 @@
+/**
+ * Warden Portal Styles
+ * Mobile-first design for field officers
+ * Uses Barbados national colors for cohesive design
+ */
+
+/* Import CSS Variables from main App */
+:root {
+  --primary-blue: #003f87;
+  --primary-gold: #ffc72c;
+  --dark-blue: #002855;
+  --light-blue: #4a90e2;
+  --success-green: #28a745;
+  --danger-red: #dc3545;
+  --warning-orange: #fd7e14;
+  --light-gray: #f8f9fa;
+  --medium-gray: #e9ecef;
+  --dark-gray: #495057;
+  --white: #ffffff;
+  --text-dark: #212529;
+  --border-color: #dee2e6;
+}
+
+/* ============================================================================
+   WARDEN PORTAL LAYOUT
+   ============================================================================ */
+
+.warden-portal {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--primary-blue, #003f87) 0%, var(--dark-blue, #002855) 100%);
+  position: relative;
+  overflow-x: hidden;
+}
+
+.warden-portal::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(255, 199, 44, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(74, 144, 226, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.warden-portal > * {
+  position: relative;
+  z-index: 1;
+}
+
+.warden-header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: var(--primary-blue, #003f87);
+  padding: 1rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  animation: slideDown 0.5s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.warden-header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.warden-logo h1 {
+  margin: 0;
+  color: #00267f;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.warden-logo-with-name {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.warden-logo-image {
+  height: 40px;
+  width: auto;
+  max-width: 150px;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.warden-logo-image:hover {
+  transform: scale(1.05);
+}
+
+.warden-logo-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.warden-platform-name {
+  margin: 0;
+  color: #00267f;
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.warden-subtitle {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #00267f;
+  opacity: 0.8;
+  line-height: 1.2;
+}
+
+.warden-user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.warden-badge {
+  background: linear-gradient(135deg, var(--primary-blue, #003f87) 0%, var(--light-blue, #4a90e2) 100%);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0, 63, 135, 0.3);
+}
+
+.btn-warden-logout {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(238, 90, 111, 0.3);
+}
+
+.btn-warden-logout:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(238, 90, 111, 0.4);
+}
+
+.warden-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+/* ============================================================================
+   ALERTS
+   ============================================================================ */
+
+.warden-alert {
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  animation: slideInAlert 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes slideInAlert {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.warden-alert-success {
+  background: linear-gradient(135deg, rgba(212, 237, 218, 0.95) 0%, rgba(195, 230, 203, 0.95) 100%);
+  color: #155724;
+  border-left: 4px solid #28a745;
+  border: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+.warden-alert-error {
+  background: linear-gradient(135deg, rgba(248, 215, 218, 0.95) 0%, rgba(245, 198, 203, 0.95) 100%);
+  color: #721c24;
+  border-left: 4px solid #dc3545;
+  border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+/* ============================================================================
+   OFFENCE SELECTION & CALCULATION
+   ============================================================================ */
+
+.offence-selection {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 1.5rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 0.6s ease;
+}
+
+.offence-selection h3 {
+  margin: 0 0 1rem 0;
+  color: #2c3e50;
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid rgba(0, 63, 135, 0.2);
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: inherit;
+  background: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+}
+
+.form-select:focus {
+  outline: none;
+  border-color: var(--primary-blue, #003f87);
+  box-shadow: 0 0 0 4px rgba(0, 63, 135, 0.1);
+  background: white;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid rgba(0, 63, 135, 0.2);
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: inherit;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary-blue, #003f87);
+  box-shadow: 0 0 0 4px rgba(0, 63, 135, 0.1);
+  background: white;
+  transform: translateY(-2px);
+}
+
+/* Calculation Preview */
+.calculation-preview {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(32, 201, 151, 0.1) 100%);
+  border: 2px solid rgba(40, 167, 69, 0.3);
+  animation: slideInCalc 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes slideInCalc {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.calculation-preview.calculating {
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.1) 0%, rgba(0, 63, 135, 0.1) 100%);
+  border-color: rgba(74, 144, 226, 0.3);
+  text-align: center;
+}
+
+.calculation-preview.court-required {
+  background: linear-gradient(135deg, rgba(220, 53, 69, 0.1) 0%, rgba(238, 90, 111, 0.1) 100%);
+  border-color: rgba(220, 53, 69, 0.4);
+}
+
+.calculation-preview h4 {
+  margin: 0 0 1rem 0;
+  color: var(--primary-blue, #003f87);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.calc-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.calc-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.calc-row:last-child {
+  border-bottom: none;
+}
+
+.calc-row span {
+  color: #495057;
+  font-size: 0.95rem;
+}
+
+.calc-row strong {
+  color: #2c3e50;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.calc-amount {
+  color: var(--success-green, #28a745);
+  font-size: 1.3rem !important;
+}
+
+.repeat-warning {
+  background: rgba(253, 126, 20, 0.1);
+  padding: 0.75rem;
+  border-radius: 8px;
+  border-left: 3px solid var(--warning-orange, #fd7e14);
+}
+
+.repeat-warning span,
+.repeat-warning strong {
+  color: #d63384;
+}
+
+.court-warning {
+  background: rgba(220, 53, 69, 0.15);
+  padding: 0.75rem;
+  border-radius: 8px;
+  border-left: 3px solid var(--danger-red, #dc3545);
+  color: #721c24;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.court-notice {
+  text-align: center;
+  color: #721c24;
+  font-weight: 600;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: rgba(220, 53, 69, 0.1);
+  border-radius: 8px;
+  border-left: 3px solid var(--danger-red, #dc3545);
+}
+
+/* ============================================================================
+   QUICK OFFENSES (LEGACY - KEPT FOR BACKWARDS COMPATIBILITY)
+   ============================================================================ */
+
+.quick-offenses {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 1.5rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 0.6s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.quick-offenses h3 {
+  margin: 0 0 1rem 0;
+  color: #2c3e50;
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.quick-offenses h3::before {
+  content: '⚡';
+  font-size: 1.3rem;
+}
+
+.offense-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.75rem;
+}
+
+.offense-btn {
+  background: linear-gradient(135deg, var(--primary-blue, #003f87) 0%, var(--light-blue, #4a90e2) 100%);
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0, 63, 135, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.offense-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 199, 44, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.offense-btn:hover::before {
+  left: 100%;
+}
+
+.offense-btn:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 63, 135, 0.5);
+}
+
+.offense-btn:active {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.offense-name {
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.offense-amount {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+/* ============================================================================
+   FORM STYLES
+   ============================================================================ */
+
+.warden-form {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 1.5rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 0.7s ease 0.1s both;
+}
+
+.form-section {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid rgba(0, 63, 135, 0.1);
+  position: relative;
+}
+
+.form-section:last-of-type {
+  border-bottom: none;
+}
+
+.form-section h3 {
+  margin: 0 0 1.25rem 0;
+  color: var(--primary-blue, #003f87);
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.form-section h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-blue, #003f87), transparent);
+  border-radius: 2px;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid rgba(0, 63, 135, 0.2);
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: inherit;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary-blue, #003f87);
+  box-shadow: 0 0 0 4px rgba(0, 63, 135, 0.1);
+  background: white;
+  transform: translateY(-2px);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.input-with-button {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.input-with-button input {
+  flex: 1;
+}
+
+.btn-auto {
+  background: linear-gradient(135deg, var(--primary-gold, #ffc72c) 0%, #ffb300 100%);
+  color: var(--dark-blue, #002855);
+  border: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(255, 199, 44, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-auto::before {
+  content: '✨';
+  position: absolute;
+  left: -20px;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.btn-auto:hover::before {
+  left: 10px;
+  opacity: 1;
+}
+
+.btn-auto:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(255, 199, 44, 0.5);
+  padding-left: 2rem;
+}
+
+.form-actions {
+  margin-top: 2rem;
+}
+
+.btn-warden-submit {
+  width: 100%;
+  background: linear-gradient(135deg, var(--success-green, #28a745) 0%, #20c997 100%);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 16px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-warden-submit::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-warden-submit:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-warden-submit:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(40, 167, 69, 0.5);
+}
+
+.btn-warden-submit:active:not(:disabled) {
+  transform: translateY(-1px) scale(1);
+}
+
+.btn-warden-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ============================================================================
+   RECENT TICKETS - COMPACT TABLE LAYOUT
+   ============================================================================ */
+
+.recent-tickets {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 1.5rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+.recent-tickets h3 {
+  margin: 0 0 1rem 0;
+  color: #2c3e50;
+  font-size: 1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.recent-tickets h3::before {
+  content: '📋';
+  font-size: 1.1rem;
+}
+
+.tickets-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 63, 135, 0.1);
+}
+
+.ticket-card {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(0, 63, 135, 0.08);
+  transition: all 0.2s ease;
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1rem;
+  align-items: center;
+}
+
+.ticket-card:last-child {
+  border-bottom: none;
+}
+
+.ticket-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--primary-blue, #003f87);
+  transition: width 0.2s ease;
+}
+
+.ticket-card:hover {
+  background: rgba(248, 249, 250, 0.95);
+  transform: translateX(3px);
+}
+
+.ticket-card:hover::before {
+  width: 5px;
+}
+
+.ticket-serial {
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--primary-blue, #003f87);
+  min-width: 80px;
+}
+
+.ticket-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.ticket-primary {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.ticket-vehicle {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 0.85rem;
+}
+
+.ticket-amount {
+  font-weight: 700;
+  color: var(--success-green, #28a745);
+  font-size: 0.9rem;
+}
+
+.ticket-secondary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: #6c757d;
+  flex-wrap: wrap;
+}
+
+.ticket-offense {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ticket-date {
+  white-space: nowrap;
+}
+
+.ticket-status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  min-width: 70px;
+  text-align: center;
+}
+
+.status-unpaid {
+  background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
+  color: #856404;
+  border: 1px solid #ffeaa7;
+}
+
+.status-paid {
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  color: #155724;
+  border: 1px solid #b1dfbb;
+}
+
+.status-overdue {
+  background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+  color: #721c24;
+  border: 1px solid #f1b0b7;
+}
+
+.no-tickets {
+  text-align: center;
+  padding: 2rem;
+  color: #7f8c8d;
+  font-style: italic;
+  background: rgba(248, 249, 250, 0.5);
+  border-radius: 12px;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN - EXECUTIVE LEVEL
+   ============================================================================ */
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced Focus States for Accessibility */
+*:focus-visible {
+  outline: 3px solid var(--primary-gold, #ffc72c);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Large Desktop (1440px+) */
+@media (min-width: 1440px) {
+  .warden-container {
+    max-width: 900px;
+  }
+  
+  .warden-header {
+    padding: 2rem 0;
+  }
+  
+  .warden-logo h1 {
+    font-size: 1.75rem;
+  }
+  
+  .offense-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+  
+  .offense-btn {
+    padding: 1.25rem;
+  }
+  
+  .form-section h3 {
+    font-size: 1.25rem;
+  }
+}
+
+/* Desktop (1024px - 1439px) */
+@media (max-width: 1439px) {
+  .warden-container {
+    max-width: 800px;
+  }
+}
+
+/* Tablet Landscape (1024px) */
+@media (max-width: 1024px) {
+  .warden-container {
+    max-width: 100%;
+    padding: 1.25rem;
+  }
+
+  .offense-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .ticket-card {
+    grid-template-columns: auto 1fr auto;
+  }
+}
+
+/* Mobile Landscape & Small Tablet (481px - 768px) */
+@media (max-width: 768px) {
+  .warden-container {
+    padding: 1rem;
+  }
+
+  .warden-header {
+    padding: 0.75rem;
+  }
+
+  .warden-header-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+  }
+
+  .warden-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .warden-logo-with-name {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .warden-logo h1 {
+    font-size: 1.25rem;
+  }
+
+  .warden-logo-image {
+    height: 35px;
+    max-width: 130px;
+  }
+
+  .warden-platform-name {
+    font-size: 1.1rem;
+  }
+
+  .warden-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .warden-user {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .warden-badge {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .offense-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .offense-btn {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .offense-name {
+    font-size: 0.8rem;
+  }
+
+  .offense-amount {
+    font-size: 1.1rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .warden-form {
+    padding: 1rem;
+  }
+
+  .form-section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+  }
+
+  .form-section h3 {
+    font-size: 1rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    padding: 0.65rem;
+    font-size: 0.95rem;
+  }
+
+  .btn-warden-submit {
+    padding: 0.9rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .ticket-card {
+    padding: 0.85rem;
+  }
+
+  .ticket-serial {
+    font-size: 1rem;
+  }
+
+  .ticket-details p {
+    font-size: 0.85rem;
+  }
+}
+
+/* Mobile Portrait (320px - 480px) */
+@media (max-width: 480px) {
+  .warden-portal {
+    font-size: 14px;
+  }
+
+  .warden-header {
+    padding: 0.5rem;
+  }
+
+  .warden-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .warden-logo-with-name {
+    flex-direction: column;
+    gap: 0.4rem;
+    text-align: center;
+  }
+
+  .warden-logo h1 {
+    font-size: 1.1rem;
+  }
+
+  .warden-logo-image {
+    height: 30px;
+    max-width: 120px;
+  }
+
+  .warden-platform-name {
+    font-size: 1rem;
+  }
+
+  .warden-subtitle {
+    font-size: 0.75rem;
+  }
+
+  .warden-badge {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.7rem;
+  }
+
+  .btn-warden-logout {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .warden-container {
+    padding: 0.75rem;
+  }
+
+  .quick-offenses,
+  .warden-form,
+  .recent-tickets {
+    padding: 1rem;
+  }
+
+  .quick-offenses h3,
+  .recent-tickets h3 {
+    font-size: 1rem;
+  }
+
+  .offense-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .offense-btn {
+    padding: 0.75rem;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .offense-name {
+    font-size: 0.85rem;
+    text-align: left;
+  }
+
+  .offense-amount {
+    font-size: 1.1rem;
+  }
+
+  .form-section h3 {
+    font-size: 0.95rem;
+  }
+
+  .form-group label {
+    font-size: 0.85rem;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+
+  .input-with-button {
+    flex-direction: column;
+  }
+
+  .input-with-button input {
+    width: 100%;
+  }
+
+  .btn-auto {
+    width: 100%;
+    padding: 0.65rem;
+  }
+
+  .btn-warden-submit {
+    padding: 0.85rem 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  /* Compact ticket cards for mobile */
+  .ticket-card {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 0.75rem;
+  }
+
+  .ticket-serial {
+    font-size: 0.85rem;
+    min-width: auto;
+  }
+
+  .ticket-info {
+    order: 2;
+  }
+
+  .ticket-status {
+    order: 1;
+    justify-self: end;
+    font-size: 0.65rem;
+    padding: 0.2rem 0.6rem;
+    min-width: 60px;
+  }
+
+  .ticket-primary {
+    gap: 0.5rem;
+  }
+
+  .ticket-vehicle {
+    font-size: 0.8rem;
+  }
+
+  .ticket-amount {
+    font-size: 0.85rem;
+  }
+
+  .ticket-secondary {
+    font-size: 0.7rem;
+    gap: 0.4rem;
+  }
+
+  .ticket-offense {
+    max-width: 150px;
+  }
+}
+
+/* Extra Small Devices (< 320px) */
+@media (max-width: 320px) {
+  .warden-logo h1 {
+    font-size: 1rem;
+  }
+
+  .offense-btn {
+    padding: 0.6rem;
+  }
+
+  .offense-name {
+    font-size: 0.75rem;
+  }
+
+  .offense-amount {
+    font-size: 1rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    font-size: 0.85rem;
+  }
+}
+
+/* Landscape Orientation Adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
+  .warden-header {
+    position: relative;
+  }
+
+  .quick-offenses {
+    margin-bottom: 1rem;
+  }
+
+  .offense-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .form-section {
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+  }
+}
+
+/* ============================================================================
+   PRINT STYLES
+   ============================================================================ */
+
+@media print {
+  .warden-header,
+  .quick-offenses,
+  .form-actions,
+  .recent-tickets,
+  .btn-warden-logout,
+  .btn-auto {
+    display: none !important;
+  }
+
+  .warden-form,
+  .offence-selection {
+    box-shadow: none;
+    border: 1px solid #000;
+    page-break-inside: avoid;
+  }
+  
+  .warden-portal {
+    background: white;
+  }
+  
+  .warden-portal::before {
+    display: none;
+  }
+  
+  .calculation-preview {
+    border: 1px solid #000;
+    page-break-inside: avoid;
+  }
+}
+
+/* ============================================================================
+   EXECUTIVE-LEVEL ENHANCEMENTS
+   ============================================================================ */
+
+/* Enhanced Shadows */
+.warden-header {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.quick-offenses,
+.offence-selection,
+.warden-form,
+.recent-tickets {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.quick-offenses:hover,
+.offence-selection:hover,
+.warden-form:hover,
+.recent-tickets:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Enhanced Button Interactions */
+.offense-btn:active,
+.btn-warden-submit:not(:disabled):active,
+.btn-auto:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Pulse Animation for Submit Button */
+@keyframes submitPulse {
+  0%, 100% {
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+  }
+  50% {
+    box-shadow: 0 8px 30px rgba(40, 167, 69, 0.6);
+  }
+}
+
+.btn-warden-submit:not(:disabled) {
+  animation: submitPulse 2s ease-in-out infinite;
+}
+
+/* Enhanced Calculation Preview */
+.calculation-preview {
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
+}
+
+.calculation-preview.court-required {
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+  animation: warningShake 0.5s ease-in-out;
+}
+
+@keyframes warningShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* Better Focus States */
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus,
+.form-select:focus {
+  box-shadow: 0 0 0 4px rgba(0, 63, 135, 0.15), 0 2px 8px rgba(0, 63, 135, 0.1);
+}
+
+/* Enhanced Ticket Cards */
+.ticket-card {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.ticket-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Better Alert Animations */
+.warden-alert {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhanced Badge Styling */
+.warden-badge {
+  box-shadow: 0 2px 8px rgba(0, 63, 135, 0.3);
+}
+
+/* Better Status Badge Visibility */
+.ticket-status {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Improved Accessibility - High Contrast Mode */
+@media (prefers-contrast: high) {
+  .offense-btn,
+  .btn-warden-submit,
+  .btn-auto,
+  .ticket-status,
+  .warden-badge {
+    border: 2px solid currentColor;
+  }
+  
+  .warden-portal::before {
+    display: none;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .btn-warden-submit:not(:disabled) {
+    animation: none;
+  }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .offense-btn,
+  .btn-warden-submit,
+  .btn-auto,
+  .btn-warden-logout {
+    min-height: 48px;
+    min-width: 48px;
+  }
+  
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    min-height: 48px;
+  }
+  
+  .ticket-card {
+    padding: 1rem;
+  }
+}
+
+/* Enhanced Gradient Backgrounds */
+.warden-portal {
+  background-attachment: fixed;
+}
+
+/* Enhanced Hover Effects */
+.offense-btn:hover,
+.btn-auto:hover,
+.btn-warden-submit:not(:disabled):hover {
+  filter: brightness(1.05);
+}
+
+/* Improved Calculation Preview Animations */
+.calc-row {
+  animation: slideInLeft 0.3s ease-out;
+  animation-fill-mode: both;
+}
+
+.calc-row:nth-child(1) { animation-delay: 0.1s; }
+.calc-row:nth-child(2) { animation-delay: 0.2s; }
+.calc-row:nth-child(3) { animation-delay: 0.3s; }
+.calc-row:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Better Empty States */
+.no-tickets {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Enhanced Form Section Headers */
+.form-section h3::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 20px;
+  background: var(--primary-gold, #ffc72c);
+  margin-right: 0.5rem;
+  border-radius: 2px;
+  vertical-align: middle;
+}
+
+/* Better Ticket Serial Styling */
+.ticket-serial::before {
+  content: '#';
+  opacity: 0.5;
+  margin-right: 2px;
+}
+
+/* Improved Amount Highlighting */
+.ticket-amount,
+.calc-amount {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Better Court Warning Visibility */
+.court-warning,
+.court-notice {
+  animation: warningPulse 2s ease-in-out infinite;
+}
+
+@keyframes warningPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* ============================================================================
+   PHOTO UPLOAD STYLES
+   ============================================================================ */
+
+.photo-upload-container {
+  margin-top: 1rem;
+}
+
+.photo-upload-area {
+  border: 2px dashed rgba(0, 63, 135, 0.3);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  background: rgba(248, 249, 250, 0.5);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.photo-upload-area:hover {
+  border-color: var(--primary-blue, #003f87);
+  background: rgba(0, 63, 135, 0.05);
+}
+
+.photo-upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  color: #2c3e50;
+}
+
+.photo-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.photo-upload-label span {
+  font-weight: 600;
+}
+
+.photo-hint {
+  font-size: 0.85rem !important;
+  color: #6c757d !important;
+  font-weight: 400 !important;
+}
+
+.photo-preview-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(248, 249, 250, 0.5);
+  border-radius: 16px;
+}
+
+.photo-preview {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 8px;
+  object-fit: contain;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-remove-photo {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+  border: none;
+  color: white;
+  padding: 0.6rem 1.25rem;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(238, 90, 111, 0.3);
+}
+
+.btn-remove-photo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(238, 90, 111, 0.4);
+}
+
+/* Mobile adjustments for photo upload */
+@media (max-width: 768px) {
+  .photo-upload-area {
+    padding: 1.5rem;
+  }
+  
+  .photo-icon {
+    font-size: 2rem;
+  }
+  
+  .photo-preview {
+    max-height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .photo-upload-area {
+    padding: 1rem;
+  }
+  
+  .photo-icon {
+    font-size: 1.75rem;
+  }
+  
+  .photo-preview {
+    max-height: 150px;
+  }
+}

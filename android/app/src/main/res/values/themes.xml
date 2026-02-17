@@ -1,0 +1,35 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme -->
+    <style name="Theme.PayFineFieldOfficer" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorSecondaryVariant">@color/secondary_dark</item>
+        <item name="colorOnSecondary">@color/black</item>
+        
+        <!-- Status bar color -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        
+        <!-- Customize your theme here -->
+        <item name="android:windowBackground">@color/white</item>
+        
+        <!-- Full-screen / Kiosk mode settings -->
+        <item name="android:windowLayoutInDisplayCutoutMode" tools:targetApi="p">shortEdges</item>
+    </style>
+    
+    <!-- Full-screen theme for immersive kiosk mode -->
+    <style name="Theme.PayFineFieldOfficer.Fullscreen" parent="Theme.PayFineFieldOfficer">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowLayoutInDisplayCutoutMode" tools:targetApi="p">shortEdges</item>
+    </style>
+    
+    <!-- Splash screen theme -->
+    <style name="Theme.PayFineFieldOfficer.Splash" parent="Theme.PayFineFieldOfficer">
+        <item name="android:windowBackground">@color/primary</item>
+    </style>
+</resources>

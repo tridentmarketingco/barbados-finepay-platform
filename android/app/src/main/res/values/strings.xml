@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">PayFine Field Officer</string>
+    <string name="printer_not_ready">Printer not ready</string>
+    <string name="printer_ready">Printer ready</string>
+    <string name="print_success">Ticket printed successfully</string>
+    <string name="print_failed">Print failed</string>
+    <string name="loading">Loading...</string>
+</resources>

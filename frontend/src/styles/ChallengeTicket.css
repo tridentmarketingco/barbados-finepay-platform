@@ -1,0 +1,724 @@
+/**
+ * Challenge Ticket Component Styles
+ * Professional styling for the ticket challenge submission interface
+ */
+
+/* ============================================================================
+   CHALLENGE FORM CONTAINER
+   ============================================================================ */
+
+.challenge-form-container {
+  max-width: 900px;
+  margin: 0 auto;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.challenge-form-container h2 {
+  color: var(--primary-blue);
+  font-size: 2rem;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 3px solid var(--primary-gold);
+  padding-bottom: 1rem;
+}
+
+/* ============================================================================
+   TICKET SUMMARY SECTION
+   ============================================================================ */
+
+.ticket-summary {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border: 2px solid var(--border-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.ticket-summary h3 {
+  color: var(--primary-blue);
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ticket-summary h3::before {
+  content: '🎫';
+  font-size: 1.5rem;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.summary-item {
+  background: var(--white);
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--primary-blue);
+  transition: all 0.3s ease;
+}
+
+.summary-item:hover {
+  transform: translateX(4px);
+  box-shadow: 0 2px 8px rgba(0, 63, 135, 0.15);
+}
+
+.summary-item label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--dark-gray);
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.summary-item span {
+  display: block;
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+.summary-item code {
+  background: var(--light-gray);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  color: var(--primary-blue);
+  font-weight: 700;
+}
+
+.summary-item strong {
+  color: var(--primary-blue);
+  font-size: 1.25rem;
+}
+
+/* ============================================================================
+   CHALLENGE INFO BOX
+   ============================================================================ */
+
+.challenge-info-box {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  border-left: 5px solid var(--light-blue);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(74, 144, 226, 0.15);
+}
+
+.challenge-info-box h4 {
+  color: var(--primary-blue);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.challenge-info-box p {
+  color: #0c5460;
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.challenge-info-box p:last-child {
+  margin-bottom: 0;
+}
+
+.challenge-info-box strong {
+  color: var(--primary-blue);
+  font-weight: 600;
+}
+
+/* ============================================================================
+   CHALLENGE FORM
+   ============================================================================ */
+
+.challenge-form {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 2px solid var(--border-color);
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.challenge-form .form-group {
+  margin-bottom: 2rem;
+}
+
+.challenge-form .form-group label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.75rem;
+}
+
+.challenge-form .form-input {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  line-height: 1.6;
+  transition: all 0.3s ease;
+  resize: vertical;
+  min-height: 120px;
+}
+
+.challenge-form .form-input:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 4px rgba(0, 63, 135, 0.1);
+  transform: translateY(-2px);
+}
+
+.challenge-form .form-input:disabled {
+  background: var(--light-gray);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.challenge-form .form-input::placeholder {
+  color: #adb5bd;
+  font-style: italic;
+}
+
+.challenge-form small {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--dark-gray);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+/* ============================================================================
+   FORM ACTIONS
+   ============================================================================ */
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--border-color);
+}
+
+.form-actions .btn {
+  min-width: 150px;
+  padding: 0.875rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* ============================================================================
+   ERROR MESSAGE
+   ============================================================================ */
+
+.error-message {
+  background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+  border-left: 5px solid var(--danger-red);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  animation: shake 0.5s ease-in-out;
+}
+
+.error-message p {
+  color: #721c24;
+  margin: 0;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+/* ============================================================================
+   LEGAL NOTICE
+   ============================================================================ */
+
+.legal-notice {
+  background: #fff3cd;
+  border-left: 4px solid var(--warning-orange);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.legal-notice p {
+  margin: 0;
+  color: #856404;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.legal-notice small {
+  color: #856404;
+}
+
+/* ============================================================================
+   SUCCESS STATE
+   ============================================================================ */
+
+.challenge-success {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  animation: fadeInScale 0.6s ease-out;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.success-icon {
+  font-size: 5rem;
+  margin-bottom: 1.5rem;
+  animation: bounce 1s ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.challenge-success h2 {
+  color: var(--success-green);
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* ============================================================================
+   CHALLENGE INFO DISPLAY
+   ============================================================================ */
+
+.challenge-info {
+  background: var(--light-gray);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.challenge-info p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  color: var(--text-dark);
+}
+
+.challenge-info strong {
+  color: var(--primary-blue);
+  font-weight: 600;
+}
+
+.challenge-info .badge {
+  display: inline-block;
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-left: 0.5rem;
+}
+
+.badge-warning {
+  background: #fff3cd;
+  color: #856404;
+  border: 2px solid #ffc107;
+}
+
+/* ============================================================================
+   NEXT STEPS SECTION
+   ============================================================================ */
+
+.next-steps {
+  background: var(--white);
+  border: 2px solid var(--primary-blue);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0, 63, 135, 0.1);
+}
+
+.next-steps h3 {
+  color: var(--primary-blue);
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.next-steps ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.next-steps li {
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  background: var(--light-gray);
+  border-left: 4px solid var(--primary-blue);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-dark);
+  transition: all 0.3s ease;
+  position: relative;
+  padding-left: 3rem;
+}
+
+.next-steps li:last-child {
+  margin-bottom: 0;
+}
+
+.next-steps li:hover {
+  background: #e3f2fd;
+  transform: translateX(4px);
+}
+
+.next-steps li::before {
+  content: '✓';
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background: var(--primary-blue);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+
+/* ============================================================================
+   IMPORTANT NOTICE
+   ============================================================================ */
+
+.important-notice {
+  background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
+  border: 2px solid var(--warning-orange);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: left;
+  box-shadow: 0 2px 8px rgba(253, 126, 20, 0.15);
+}
+
+.important-notice h4 {
+  color: #856404;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.important-notice p {
+  color: #856404;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.important-notice strong {
+  color: #664d03;
+  font-weight: 700;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+/* Tablet (768px and below) */
+@media (max-width: 768px) {
+  .challenge-form-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .challenge-form {
+    padding: 1.5rem;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .form-actions .btn {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .next-steps {
+    padding: 1.5rem;
+  }
+
+  .next-steps h3 {
+    font-size: 1.25rem;
+  }
+
+  .next-steps li {
+    padding: 0.875rem;
+    padding-left: 2.75rem;
+    font-size: 0.9rem;
+  }
+
+  .next-steps li::before {
+    width: 20px;
+    height: 20px;
+    font-size: 0.75rem;
+    left: 0.875rem;
+  }
+}
+
+/* Mobile (480px and below) */
+@media (max-width: 480px) {
+  .challenge-form-container h2 {
+    font-size: 1.25rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .ticket-summary {
+    padding: 1rem;
+  }
+
+  .ticket-summary h3 {
+    font-size: 1.1rem;
+  }
+
+  .summary-item {
+    padding: 0.75rem;
+  }
+
+  .summary-item label {
+    font-size: 0.75rem;
+  }
+
+  .summary-item span {
+    font-size: 1rem;
+  }
+
+  .challenge-info-box {
+    padding: 1rem;
+  }
+
+  .challenge-info-box h4 {
+    font-size: 1rem;
+  }
+
+  .challenge-info-box p {
+    font-size: 0.9rem;
+  }
+
+  .challenge-form {
+    padding: 1rem;
+  }
+
+  .challenge-form .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .challenge-form .form-input {
+    padding: 0.75rem;
+    font-size: 0.95rem;
+  }
+
+  .success-icon {
+    font-size: 3.5rem;
+  }
+
+  .challenge-success h2 {
+    font-size: 1.5rem;
+  }
+
+  .challenge-info {
+    padding: 1rem;
+  }
+
+  .next-steps {
+    padding: 1rem;
+  }
+
+  .next-steps h3 {
+    font-size: 1.1rem;
+  }
+
+  .next-steps li {
+    padding: 0.75rem;
+    padding-left: 2.5rem;
+    font-size: 0.85rem;
+  }
+
+  .important-notice {
+    padding: 1rem;
+  }
+
+  .important-notice h4 {
+    font-size: 1.1rem;
+  }
+
+  .important-notice p {
+    font-size: 0.9rem;
+  }
+
+  .legal-notice {
+    padding: 0.875rem 1rem;
+  }
+
+  .legal-notice p {
+    font-size: 0.8rem;
+  }
+}
+
+/* Extra Small Mobile (375px and below) */
+@media (max-width: 375px) {
+  .challenge-form-container h2 {
+    font-size: 1.15rem;
+  }
+
+  .summary-item code {
+    font-size: 0.9rem;
+  }
+
+  .summary-item strong {
+    font-size: 1.1rem;
+  }
+
+  .challenge-form .form-input {
+    min-height: 100px;
+  }
+
+  .success-icon {
+    font-size: 3rem;
+  }
+
+  .challenge-success h2 {
+    font-size: 1.35rem;
+  }
+}
+
+/* ============================================================================
+   PRINT STYLES
+   ============================================================================ */
+
+@media print {
+  .challenge-form-container {
+    max-width: 100%;
+  }
+
+  .form-actions,
+  .challenge-form .btn {
+    display: none !important;
+  }
+
+  .challenge-form,
+  .ticket-summary,
+  .challenge-info-box,
+  .next-steps,
+  .important-notice {
+    box-shadow: none;
+    border: 1px solid #ddd;
+    page-break-inside: avoid;
+  }
+
+  .success-icon {
+    animation: none;
+  }
+}
+
+/* ============================================================================
+   ACCESSIBILITY ENHANCEMENTS
+   ============================================================================ */
+
+.challenge-form .form-input:focus-visible {
+  outline: 3px solid var(--primary-gold);
+  outline-offset: 2px;
+}
+
+.form-actions .btn:focus-visible {
+  outline: 3px solid var(--primary-gold);
+  outline-offset: 2px;
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .summary-item,
+  .challenge-info-box,
+  .challenge-form,
+  .next-steps,
+  .important-notice {
+    border-width: 3px;
+  }
+
+  .challenge-form .form-input {
+    border-width: 3px;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .challenge-form-container,
+  .challenge-success,
+  .success-icon,
+  .summary-item,
+  .next-steps li,
+  .error-message {
+    animation: none;
+  }
+
+  .summary-item:hover,
+  .next-steps li:hover,
+  .challenge-form .form-input:focus {
+    transform: none;
+  }
+}
+
+/* ============================================================================
+   DARK MODE SUPPORT (Future Enhancement)
+   ============================================================================ */
+
+@media (prefers-color-scheme: dark) {
+  /* Dark mode styles can be added here in the future */
+}

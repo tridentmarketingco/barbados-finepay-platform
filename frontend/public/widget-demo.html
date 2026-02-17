@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticket Lookup Widget - Demo & Embed Guide</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-blue: #003f87;
+      --primary-gold: #ffc72c;
+      --dark-blue: #002855;
+      --light-gray: #f8f9fa;
+      --dark-gray: #495057;
+      --text-dark: #212529;
+      --border-color: #dee2e6;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+      background: var(--light-gray);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+      color: white;
+      padding: 40px 0;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    section {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+
+    section h2 {
+      color: var(--primary-blue);
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      border-bottom: 2px solid var(--primary-gold);
+      padding-bottom: 10px;
+    }
+
+    section h3 {
+      color: var(--dark-gray);
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+    }
+
+    .embed-method {
+      margin-bottom: 30px;
+    }
+
+    .code-block {
+      background: #2d2d2d;
+      color: #f8f8f2;
+      padding: 20px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin: 15px 0;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .code-block .comment { color: #6272a4; }
+    .code-block .tag { color: #ff79c6; }
+    .code-block .attr { color: #50fa7b; }
+    .code-block .string { color: #f1fa8c; }
+
+    .widget-preview {
+      border: 2px dashed var(--border-color);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+      background: var(--light-gray);
+    }
+
+    .widget-preview-label {
+      font-size: 0.85rem;
+      color: var(--dark-gray);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .config-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .config-option {
+      background: var(--light-gray);
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    .config-option h4 {
+      color: var(--primary-blue);
+      margin-bottom: 10px;
+    }
+
+    .config-option p {
+      color: var(--dark-gray);
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+
+    .features-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .features-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .features-list li:last-child {
+      border-bottom: none;
+    }
+
+    .feature-icon {
+      font-size: 1.2rem;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .notice {
+      background: #e3f2fd;
+      border-left: 4px solid var(--primary-blue);
+      padding: 15px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 20px 0;
+    }
+
+    .notice strong {
+      color: var(--primary-blue);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: var(--primary-blue);
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: background 0.3s;
+      margin-right: 10px;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      background: var(--dark-blue);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: var(--border-color);
+      color: var(--text-dark);
+    }
+
+    .btn-secondary:hover {
+      background: #ccc;
+      color: var(--text-dark);
+    }
+
+    ul {
+      margin-left: 20px;
+      margin-bottom: 15px;
+    }
+
+    ul li {
+      margin-bottom: 8px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--dark-gray);
+    }
+
+    @media (max-width: 768px) {
+      .two-column {
+        grid-template-columns: 1fr;
+      }
+      
+      header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .container {
+        padding: 20px;
+      }
+      
+      section {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Ticket Lookup Widget</h1>
+    <p>Embeddable HTML widget for traffic ticket lookup and payment</p>
+  </header>
+
+  <div class="container">
+    <!-- Features Section -->
+    <section>
+      <h2>Features</h2>
+      <ul class="features-list">
+        <li><span class="feature-icon">🔍</span> <strong>Ticket Search</strong> - Look up tickets by serial number (e.g., A459778)</li>
+        <li><span class="feature-icon">💳</span> <strong>Payment Integration</strong> - Connects to PowerTranz HPP for secure payments</li>
+        <li><span class="feature-icon">📱</span> <strong>Fully Responsive</strong> - Works on all device sizes</li>
+        <li><span class="feature-icon">🎨</span> <strong>Customizable</strong> - Theme colors and API endpoint configurable</li>
+        <li><span class="feature-icon">🔗</span> <strong>URL Support</strong> - Supports direct links like ?ticket=A459778</li>
+        <li><span class="feature-icon">⚡</span> <strong>No Dependencies</strong> - Pure HTML/CSS/JS, no frameworks needed</li>
+        <li><span class="feature-icon">🌐</span> <strong>Iframe Ready</strong> - Perfect for embedding in external sites</li>
+      </ul>
+    </section>
+
+    <!-- Embed Methods Section -->
+    <section>
+      <h2>Embed Methods</h2>
+
+      <!-- Method 1: Iframe -->
+      <div class="embed-method">
+        <h3>Method 1: iframe Embed (Recommended)</h3>
+        <p>Use an iframe to embed the widget on any website. This provides complete isolation.</p>
+        
+        <div class="code-block"><!-- Add to your HTML page -->
+<iframe src="https://your-domain.com/ticket-lookup-widget.html"
+        width="100%" height="600" frameborder="0"
+        style="border-radius: 12px; max-width: 600px;"></iframe></div>
+
+        <div class="action-buttons">
+          <a href="ticket-lookup-widget.html" target="_blank" class="btn">Open Widget</a>
+        </div>
+      </div>
+
+      <!-- Method 2: Direct Link -->
+      <div class="embed-method">
+        <h3>Method 2: Direct Link</h3>
+        <p>Share a direct link to the widget with optional ticket parameter.</p>
+        
+        <div class="code-block"><!-- Direct link examples -->
+https://your-domain.com/ticket-lookup-widget.html
+
+https://your-domain.com/ticket-lookup-widget.html?ticket=A459778</div>
+
+        <div class="action-buttons">
+          <a href="ticket-lookup-widget.html?ticket=A459778" target="_blank" class="btn">Try with Ticket A459778</a>
+        </div>
+      </div>
+
+      <!-- Method 3: JavaScript Include -->
+      <div class="embed-method">
+        <h3>Method 3: JavaScript Include (Future Feature)</h3>
+        <p>Include the widget script for dynamic embedding with callbacks.</p>
+        
+        <div class="code-block"><!-- Widget loader script (future feature) -->
+<script src="https://your-domain.com/widget-loader.js"></script>
+<script>
+  TicketLookup.init({
+    container: '#widget-container',
+    apiUrl: 'https://your-api.com/api',
+    onPayment: function(receipt) { console.log('Paid!', receipt); }
+  });
+</script></div>
+      </div>
+    </section>
+
+    <!-- Configuration Section -->
+    <section>
+      <h2>Configuration Options</h2>
+      
+      <div class="config-options">
+        <div class="config-option">
+          <h4>API Endpoint</h4>
+          <p>Configure which backend API the widget connects to.</p>
+          <div class="code-block"><!-- Via data attribute -->
+<body data-api-url="https://api.your-domain.com"></div>
+          <p><strong>Default:</strong> Auto-detects (localhost:5000 for development)</p>
+        </div>
+
+        <div class="config-option">
+          <h4>Theme Colors</h4>
+          <p>Customize widget appearance via CSS custom properties.</p>
+          <div class="code-block"><!-- Override CSS variables -->
+<style>
+  :root {
+    --primary-blue: #003f87;
+    --primary-gold: #ffc72c;
+  }
+</style>
+<iframe src="widget.html"></iframe></div>
+        </div>
+
+        <div class="config-option">
+          <h4>URL Parameters</h4>
+          <p>Pre-populate ticket number via URL.</p>
+          <div class="code-block"># Pre-load ticket A459778
+widget.html?ticket=A459778</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Widget Preview Section -->
+    <section>
+      <h2>Widget Preview</h2>
+      <p>The widget in an iframe container:</p>
+      
+      <div class="widget-preview">
+        <div class="widget-preview-label">Live Preview (iframe):</div>
+        <iframe 
+          src="ticket-lookup-widget.html" 
+          width="100%" 
+          height="500" 
+          frameborder="0"
+          style="border-radius: 8px; max-width: 600px;">
+        </iframe>
+      </div>
+    </section>
+
+    <!-- API Requirements Section -->
+    <section>
+      <h2>Backend API Requirements</h2>
+      
+      <div class="notice">
+        <strong>Prerequisite:</strong> Your backend must expose these endpoints for the widget to work:
+      </div>
+
+      <div class="two-column">
+        <div>
+          <h3>Required Endpoints</h3>
+          <div class="code-block"># GET - Look up ticket
+GET /api/lookup/{serial_number}
+
+# Response:
+{
+  "ticket": {
+    "serial_number": "A459778",
+    "status": "unpaid",
+    "fine_amount": 50.00,
+    "service": { "name": "Traffic" },
+    "offence": { "name": "Speeding" },
+    "location": "Broad Street",
+    "vehicle_plate": "ABC123",
+    "issue_date": "2024-01-15",
+    "due_date": "2024-02-15"
+  }
+}</div>
+        </div>
+
+        <div>
+          <h3>Optional Endpoints</h3>
+          <div class="code-block"># POST - Initiate payment
+POST /api/spi/initiate/{serial}
+
+# Request body:
+{
+  "email": "user@example.com",
+  "billing_address": {}
+}
+
+# Returns:
+{
+  "RedirectData": {
+    "url": "https://hpp...",
+    "Data": "..."
+  }
+}</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testing Section -->
+    <section>
+      <h2>Testing the Widget</h2>
+      
+      <div class="notice">
+        <strong>Note:</strong> For local testing, ensure the backend server is running on port 5000.
+      </div>
+
+      <h3>Quick Start Commands:</h3>
+      <div class="code-block"># 1. Start the backend server
+cd backend && python run.py
+# (Runs on http://localhost:5000)
+
+# 2. Serve the frontend (for widget testing)
+cd frontend && npx serve -s build -l 3000
+# OR for development:
+npm start
+# (Widget available at http://localhost:3000/ticket-lookup-widget.html)</div>
+
+      <h3>Sample Tickets:</h3>
+      <p>Use these tickets for testing:</p>
+      <ul>
+        <li><strong>A459778</strong> - Unpaid ticket, $50.00</li>
+        <li><strong>B123456</strong> - Overdue ticket, $100.00</li>
+        <li><strong>C789012</strong> - Paid ticket (demo receipt)</li>
+      </ul>
+
+      <div class="action-buttons">
+        <a href="ticket-lookup-widget.html?ticket=A459778" target="_blank" class="btn">Test with A459778</a>
+        <a href="ticket-lookup-widget.html" target="_blank" class="btn btn-secondary">Open Widget Empty</a>
+      </div>
+    </section>
+
+    <!-- Production Deployment Section -->
+    <section>
+      <h2>Production Deployment</h2>
+      
+      <div class="two-column">
+        <div>
+          <h3>1. Build and Deploy</h3>
+          <div class="code-block"># Build the React app (includes widget)
+cd frontend && npm run build
+
+# The widget is at:
+frontend/build/ticket-lookup-widget.html
+
+# Deploy the build folder to your web server
+# or upload to S3, Netlify, Vercel, etc.</div>
+        </div>
+
+        <div>
+          <h3>2. Configure Backend</h3>
+          <div class="code-block"># Set environment variables
+POWERTRANZ_API_URL="https://staging.ptranz.com"
+POWERTRANZ_MERCHANT_ID="your-merchant-id"
+POWERTRANZ_PASSWORD="your-password"
+
+# CORS settings for iframe embedding
+CORS_ORIGINS="https://your-website.com"</div>
+        </div>
+      </div>
+
+      <div class="notice" style="margin-top: 20px;">
+        <strong>Production Checklist:</strong>
+        <ul style="margin-top: 10px;">
+          <li>Enable HTTPS for secure payment processing</li>
+          <li>Configure proper CORS headers for iframe embedding</li>
+          <li>Set up domain-specific API endpoints</li>
+          <li>Test with real PowerTranz credentials (not sandbox)</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <p>Ticket Lookup Widget - Barbados PayFine Platform</p>
+    <p style="margin-top: 10px; font-size: 0.9rem;">
+      Part of the Government of Barbados Digital Services Initiative
+    </p>
+  </footer>
+</body>
+</html>
+

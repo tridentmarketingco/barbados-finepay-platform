@@ -1,0 +1,71 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+android {
+    namespace 'com.payfine.warden'
+    compileSdk 34
+    
+    defaultConfig {
+        applicationId "com.payfine.warden"
+        minSdk 21  // Android 5.0 - supports most Sunmi devices
+        targetSdk 34
+        versionCode 1
+        versionName "1.0.0"
+        
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            
+            // Sign with release keystore (create this for production)
+            // signingConfig signingConfigs.release
+        }
+        
+        debug {
+            debuggable true
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-DEBUG"
+        }
+    }
+    
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    
+    buildFeatures {
+        viewBinding true
+        buildConfig true
+    }
+}
+
+dependencies {
+    // AndroidX Core
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    
+    // Kotlin
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.9.22'
+    
+    // WebView (included in Android SDK, but explicit for clarity)
+    // implementation 'androidx.webkit:webkit:1.9.0'
+    
+    // JSON parsing (included in Android SDK)
+    // implementation 'org.json:json:20231013'
+    
+    // Testing
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}

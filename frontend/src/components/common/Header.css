@@ -1,0 +1,413 @@
+/**
+ * Header Component Styles
+ * Fully responsive header with dynamic branding
+ * Modern 2025-2026 fintech aesthetic with glassmorphism
+ */
+
+/* ============================================================================
+   BASE HEADER STYLES
+   ============================================================================ */
+
+.app-header {
+  /* Flat Deep Space Blue background */
+  background: var(--primary-blue);
+  color: var(--white);
+  padding: 1.5rem 0;
+  /* Enhanced elevated shadow */
+  box-shadow:
+    0 8px 32px rgba(0, 63, 135, 0.3),
+    0 4px 16px rgba(0, 0, 0, 0.15),
+    0 0 24px rgba(0, 63, 135, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 199, 44, 0.2);
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.header-logo {
+  height: 56px;
+  width: auto;
+  max-width: 200px;
+  object-fit: contain;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Subtle drop shadow */
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
+
+.header-logo:hover {
+  transform: scale(1.05);
+}
+
+.header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.header-text h1 {
+  font-size: 1.85rem;
+  margin: 0;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+  /* Subtle letter spacing for premium feel */
+  letter-spacing: -0.02em;
+  /* Text shadow for depth */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.tagline {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  font-weight: 300;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.02em;
+}
+
+/* Header Actions (Theme Toggle, etc.) */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Theme Toggle Container */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  width: 80px;
+  height: 48px;
+  border-radius: 14px;
+  border: 2px solid rgba(255, 199, 44, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(8px);
+  padding: 0 4px;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 199, 44, 0.2);
+  border-color: rgba(255, 199, 44, 0.5);
+  transform: scale(1.08);
+  box-shadow: 0 4px 16px rgba(255, 199, 44, 0.3);
+}
+
+.theme-icon-button {
+  flex: 1 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  border: none;
+  background: transparent;
+  color: var(--primary-gold);
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-icon-button:active {
+  transform: scale(0.9);
+}
+
+.theme-icon {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-icon.sun {
+  color: var(--primary-gold);
+}
+
+.theme-icon.moon {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+
+
+/* Loading placeholder */
+.loading-placeholder {
+  width: 200px;
+  height: 56px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 12px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+/* Large Desktop (1440px+) */
+@media (min-width: 1440px) {
+  .header-text h1 {
+    font-size: 2rem;
+  }
+  
+  .tagline {
+    font-size: 1rem;
+  }
+  
+  .header-logo {
+    height: 60px;
+  }
+}
+
+/* Desktop (1024px - 1439px) */
+@media (max-width: 1439px) {
+  .header-text h1 {
+    font-size: 1.75rem;
+  }
+}
+
+/* Tablet Landscape (1024px) */
+@media (max-width: 1024px) {
+  .app-header {
+    padding: 1.25rem 0;
+  }
+  
+  .header-text h1 {
+    font-size: 1.5rem;
+  }
+  
+  .tagline {
+    font-size: 0.85rem;
+  }
+  
+  .header-logo {
+    height: 45px;
+  }
+}
+
+/* Tablet Portrait (768px) */
+@media (max-width: 768px) {
+  .app-header {
+    padding: 1rem 0;
+  }
+  
+  .header-content {
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .logo-section {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .header-logo {
+    height: 50px;
+  }
+  
+  .header-text h1 {
+    font-size: 1.5rem;
+  }
+  
+  .tagline {
+    font-size: 0.85rem;
+  }
+}
+
+/* Mobile Landscape & Small Tablet (640px) */
+@media (max-width: 640px) {
+  .app-header {
+    padding: 0.85rem 0;
+  }
+  
+  .logo-section {
+    gap: 0.5rem;
+  }
+  
+  .header-logo {
+    height: 45px;
+  }
+  
+  .header-text h1 {
+    font-size: 1.35rem;
+  }
+  
+  .tagline {
+    font-size: 0.8rem;
+  }
+}
+
+/* Mobile Portrait (480px) */
+@media (max-width: 480px) {
+  .app-header {
+    padding: 0.75rem 0;
+  }
+
+  .logo-section {
+    gap: 0.5rem;
+  }
+
+  .header-logo {
+    height: 40px;
+    max-width: 150px;
+  }
+
+  .header-text h1 {
+    font-size: 1.25rem;
+  }
+
+  .tagline {
+    font-size: 0.75rem;
+  }
+
+  .loading-placeholder {
+    width: 150px;
+    height: 40px;
+  }
+
+  .theme-toggle {
+    width: 70px;
+    height: 40px;
+    border-radius: 12px;
+  }
+
+  .theme-icon {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* Extra Small Mobile (375px) */
+@media (max-width: 375px) {
+  .header-logo {
+    height: 35px;
+    max-width: 120px;
+  }
+
+  .header-text h1 {
+    font-size: 1.1rem;
+  }
+
+  .tagline {
+    font-size: 0.7rem;
+  }
+
+  .theme-toggle {
+    width: 60px;
+    height: 36px;
+    border-radius: 10px;
+  }
+
+  .theme-icon {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+/* Landscape Orientation Adjustments */
+@media (max-height: 600px) and (orientation: landscape) {
+  .app-header {
+    padding: 0.5rem 0;
+  }
+  
+  .header-logo {
+    height: 35px;
+  }
+  
+  .header-text h1 {
+    font-size: 1.25rem;
+  }
+  
+  .tagline {
+    font-size: 0.75rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .app-header {
+    background: white;
+    color: var(--primary-blue);
+    box-shadow: none;
+    border-bottom: 2px solid var(--primary-blue);
+    position: static;
+  }
+  
+  .header-logo {
+    height: 40px;
+  }
+  
+  .header-text h1 {
+    color: var(--primary-blue);
+  }
+  
+  .tagline {
+    color: var(--dark-gray);
+  }
+}
+
+/* ============================================================================
+   DARK MODE STYLES
+   ============================================================================ */
+
+html.dark .app-header {
+  background: #0a1929;
+  border-bottom-color: rgba(255, 199, 44, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+html.dark .header-text h1 {
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+html.dark .tagline {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+html.dark .theme-toggle {
+  border-color: rgba(255, 199, 44, 0.4);
+  background: rgba(255, 199, 44, 0.1);
+}
+
+
+
+html.dark .loading-placeholder {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+}
+
+/* Responsive dark mode adjustments */
+@media (max-width: 768px) {
+  html.dark .header-content {
+    justify-content: center;
+  }
+}

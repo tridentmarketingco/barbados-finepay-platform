@@ -1,0 +1,66 @@
+# PayFine - Global Government Digital Payments Platform
+# Backend Dependencies - Python 3.14+ compatible versions
+
+# Flask framework
+Flask==3.0.0
+Werkzeug==3.0.1
+
+# Database - SQLAlchemy 2.0.31+ has Python 3.14 support
+Flask-SQLAlchemy==3.1.1
+SQLAlchemy==2.0.31
+
+# Database drivers
+# SQLite is built-in (no installation needed)
+# For MySQL (DreamHost shared hosting):
+PyMySQL==1.1.0
+# For PostgreSQL (production):
+# psycopg2-binary==2.9.9
+
+# Authentication
+Flask-JWT-Extended==4.6.0
+PyJWT==2.8.0
+
+# CORS support
+Flask-CORS==4.0.0
+
+# Environment variables
+python-dotenv==1.0.0
+
+# HTTP requests (for payment gateway integration)
+requests==2.31.0
+
+# Security
+cryptography==41.0.7
+
+# Redis for caching and rate limiting
+redis==5.0.1
+
+# Rate limiting
+Flask-Limiter==3.5.0
+
+# AI/ML Libraries for Analytics
+numpy==1.26.2
+pandas==2.1.4
+scikit-learn==1.3.2
+scipy==1.11.4
+
+# Background job scheduling for late fees
+APScheduler==3.10.4
+
+# ============================================================================
+# OPTIONAL DEPENDENCIES - Azure Cloud Services
+# ============================================================================
+# These packages are only required when deploying to Azure (production/staging)
+# Install them separately when needed:
+#   pip install applicationinsights
+#   pip install azure-identity azure-keyvault-secrets
+#   pip install azure-storage-blob
+#   pip install azure-servicebus
+#
+# Uncomment below if deploying to Azure:
+# applicationinsights==0.11.10
+# azure-identity==1.15.0
+# azure-keyvault-secrets==4.7.0
+# azure-storage-blob==12.19.0
+# azure-servicebus==7.11.4
+

@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#003f87">
+  <title>Traffic Ticket Lookup</title>
+  <style>
+    /* CSS Reset & Base Styles */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-blue: #003f87;
+      --primary-gold: #ffc72c;
+      --dark-blue: #002855;
+      --light-blue: #4a90e2;
+      --success-green: #28a745;
+      --danger-red: #dc3545;
+      --warning-orange: #fd7e14;
+      --light-gray: #f8f9fa;
+      --medium-gray: #e9ecef;
+      --dark-gray: #495057;
+      --white: #ffffff;
+      --text-dark: #212529;
+      --border-color: #dee2e6;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background-color: var(--light-gray);
+      color: var(--text-dark);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Widget Container */
+    #ticket-lookup-widget {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Card Styles */
+    .tlw-card {
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    .tlw-card-header {
+      border-bottom: 2px solid var(--primary-gold);
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+    }
+
+    .tlw-card-header h2 {
+      color: var(--primary-blue);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .tlw-card-header p {
+      color: var(--dark-gray);
+      font-size: 0.9rem;
+    }
+
+    /* Form Styles */
+    .tlw-form-group {
+      margin-bottom: 16px;
+    }
+
+    .tlw-form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--text-dark);
+      font-size: 0.95rem;
+    }
+
+    .tlw-form-group input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .tlw-form-group input:focus {
+      outline: none;
+      border-color: var(--primary-blue);
+      box-shadow: 0 0 0 3px rgba(0, 63, 135, 0.1);
+    }
+
+    .tlw-form-group input::placeholder {
+      color: #adb5bd;
+    }
+
+    /* Button Styles */
+    .tlw-btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .tlw-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .tlw-btn-primary {
+      background: var(--primary-blue);
+      color: var(--white);
+    }
+
+    .tlw-btn-primary:hover:not(:disabled) {
+      background: var(--dark-blue);
+    }
+
+    .tlw-btn-success {
+      background: var(--success-green);
+      color: var(--white);
+    }
+
+    .tlw-btn-success:hover:not(:disabled) {
+      background: #218838;
+    }
+
+    .tlw-btn-secondary {
+      background: var(--medium-gray);
+      color: var(--text-dark);
+    }
+
+    .tlw-btn-secondary:hover:not(:disabled) {
+      background: var(--border-color);
+    }
+
+    /* Search Box Wrapper */
+    .tlw-search-wrapper {
+      display: flex;
+      gap: 12px;
+    }
+
+    .tlw-search-wrapper input {
+      flex: 1;
+    }
+
+    /* Sample Tickets */
+    .tlw-sample-tickets {
+      margin-top: 16px;
+      padding: 16px;
+      background: var(--light-gray);
+      border-radius: 8px;
+    }
+
+    .tlw-sample-tickets p {
+      font-size: 0.85rem;
+      color: #6c757d;
+      margin-bottom: 8px;
+    }
+
+    .tlw-sample-btn {
+      padding: 6px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      background: var(--white);
+      cursor: pointer;
+      font-size: 0.85rem;
+      margin-right: 8px;
+      margin-bottom: 8px;
+      transition: all 0.2s;
+    }
+
+    .tlw-sample-btn:hover {
+      background: var(--medium-gray);
+    }
+
+    /* Alert Styles */
+    .tlw-alert {
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border-left: 4px solid;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .tlw-alert-success {
+      background: #d4edda;
+      border-color: var(--success-green);
+      color: #155724;
+    }
+
+    .tlw-alert-error {
+      background: #f8d7da;
+      border-color: var(--danger-red);
+      color: #721c24;
+    }
+
+    .tlw-alert-info {
+      background: #d1ecf1;
+      border-color: var(--light-blue);
+      color: #0c5460;
+    }
+
+    .tlw-alert-warning {
+      background: #fff3cd;
+      border-color: var(--warning-orange);
+      color: #856404;
+    }
+
+    .tlw-alert-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    /* Ticket Details */
+    .tlw-ticket-details {
+      background: var(--light-gray);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .tlw-detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .tlw-detail-row:last-child {
+      border-bottom: none;
+    }
+
+    .tlw-detail-label {
+      font-weight: 600;
+      color: var(--dark-gray);
+    }
+
+    .tlw-detail-value {
+      color: var(--text-dark);
+      text-align: right;
+    }
+
+    .tlw-amount-row {
+      background: #e3f2fd;
+      margin: -20px -20px 20px -20px;
+      padding: 20px;
+      border-radius: 10px 10px 0 0;
+      text-align: center;
+    }
+
+    .tlw-amount-label {
+      font-size: 1.1rem;
+      color: var(--dark-gray);
+    }
+
+    .tlw-amount-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-blue);
+    }
+
+    /* Status Badge */
+    .tlw-status-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .tlw-status-unpaid {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .tlw-status-paid {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .tlw-status-overdue {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    .tlw-status-Challenged {
+      background: #e7f3ff;
+      color: #004085;
+    }
+
+    .tlw-status-Payable {
+      background: #d1ecf1;
+      color: #0c5460;
+    }
+
+    /* Action Buttons */
+    .tlw-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .tlw-actions .tlw-btn {
+      flex: 1;
+      min-width: 140px;
+    }
+
+    /* Loading Spinner */
+    .tlw-loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--white);
+      animation: tlw-spin 1s ease-in-out infinite;
+    }
+
+    @keyframes tlw-spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Loading Overlay */
+    .tlw-loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .tlw-loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid var(--medium-gray);
+      border-radius: 50%;
+      border-top-color: var(--primary-blue);
+      animation: tlw-spin 1s ease-in-out infinite;
+    }
+
+    /* Help Section */
+    .tlw-help {
+      margin-top: 16px;
+      padding: 16px;
+      background: #e8f5e9;
+      border-radius: 8px;
+      border: 1px solid #4caf50;
+    }
+
+    .tlw-help h4 {
+      color: #2e7d32;
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+    }
+
+    .tlw-help details {
+      margin-bottom: 8px;
+    }
+
+    .tlw-help summary {
+      cursor: pointer;
+      font-weight: 500;
+      color: #2e7d32;
+      font-size: 0.9rem;
+    }
+
+    .tlw-help p {
+      margin-top: 4px;
+      color: #666;
+      font-size: 0.85rem;
+      padding-left: 12px;
+    }
+
+    /* Keyboard Hint */
+    .tlw-keyboard-hint {
+      margin-top: 12px;
+      padding: 8px;
+      background: var(--light-gray);
+      border-radius: 4px;
+      font-size: 0.75rem;
+      color: #6c757d;
+      text-align: center;
+    }
+
+    .tlw-kbd {
+      padding: 2px 6px;
+      background: var(--white);
+      border: 1px solid var(--border-color);
+      border-radius: 3px;
+      font-family: monospace;
+    }
+
+    /* Receipt (Paid) */
+    .tlw-receipt {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .tlw-receipt-icon {
+      font-size: 4rem;
+      margin-bottom: 16px;
+    }
+
+    .tlw-receipt h3 {
+      color: var(--success-green);
+      margin-bottom: 8px;
+    }
+
+    .tlw-receipt p {
+      color: var(--dark-gray);
+      margin-bottom: 4px;
+    }
+
+    /* Print Styles */
+    @media print {
+      .tlw-btn, .tlw-sample-tickets, .tlw-help, .tlw-keyboard-hint {
+        display: none !important;
+      }
+      
+      .tlw-card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      #ticket-lookup-widget {
+        padding: 12px;
+      }
+      
+      .tlw-card {
+        padding: 16px;
+      }
+      
+      .tlw-card-header h2 {
+        font-size: 1.25rem;
+      }
+      
+      .tlw-search-wrapper {
+        flex-direction: column;
+      }
+      
+      .tlw-actions {
+        flex-direction: column;
+      }
+      
+      .tlw-actions .tlw-btn {
+        width: 100%;
+      }
+      
+      .tlw-detail-row {
+        flex-direction: column;
+        gap: 4px;
+      }
+      
+      .tlw-detail-value {
+        text-align: left;
+      }
+      
+      .tlw-amount-value {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="ticket-lookup-widget">
+    <!-- Search Form Card -->
+    <div class="tlw-card" id="tlw-search-card">
+      <div class="tlw-card-header">
+        <h2>🔍 Look Up Traffic Ticket</h2>
+        <p>Enter the ticket serial number (e.g., A459778)</p>
+      </div>
+
+      <form id="tlw-search-form">
+        <div class="tlw-form-group">
+          <label for="tlw-serial">Ticket Serial Number</label>
+          <div class="tlw-search-wrapper">
+            <input
+              type="text"
+              id="tlw-serial"
+              placeholder="Enter ticket serial number"
+              maxlength="7"
+              autocomplete="off"
+            >
+            <button type="submit" class="tlw-btn tlw-btn-primary" id="tlw-search-btn">
+              🔍 Search
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Sample Tickets -->
+      <div class="tlw-sample-tickets">
+        <p><strong>Try these sample tickets:</strong></p>
+        <button type="button" class="tlw-sample-btn" data-serial="A459778">A459778</button>
+        <button type="button" class="tlw-sample-btn" data-serial="B123456">B123456</button>
+        <button type="button" class="tlw-sample-btn" data-serial="C789012">C789012</button>
+      </div>
+
+      <!-- Help Section -->
+      <div class="tlw-help">
+        <h4>❓ Frequently Asked Questions</h4>
+        <details>
+          <summary>Where can I find my ticket number?</summary>
+          <p>Your ticket number is printed at the top of your traffic ticket. It follows the format A459778 (one letter followed by 6 digits).</p>
+        </details>
+        <details>
+          <summary>What payment methods are accepted?</summary>
+          <p>We accept all major credit and debit cards through our secure 3D-Secure payment system.</p>
+        </details>
+        <details>
+          <summary>Need more help?</summary>
+          <p>📞 Magistrate Court: +1-246-228-2503<br>📍 Coleridge Street, Bridgetown, Barbados</p>
+        </details>
+      </div>
+
+      <!-- Keyboard Hint -->
+      <div class="tlw-keyboard-hint">
+        💡 <strong>Tip:</strong> Press <kbd class="tlw-kbd">Esc</kbd> to clear
+      </div>
+    </div>
+
+    <!-- Alert Container -->
+    <div id="tlw-alert-container"></div>
+
+    <!-- Ticket Details Card (hidden by default) -->
+    <div class="tlw-card" id="tlw-ticket-card" style="display: none;">
+      <div class="tlw-card-header">
+        <h2>🎫 Ticket Details</h2>
+        <span class="tlw-status-badge" id="tlw-status-badge"></span>
+      </div>
+
+      <!-- Ticket Info -->
+      <div class="tlw-ticket-details" id="tlw-ticket-info">
+        <!-- Populated by JavaScript -->
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="tlw-actions" id="tlw-actions">
+        <!-- Populated by JavaScript -->
+      </div>
+    </div>
+
+    <!-- Paid Receipt Card (hidden by default) -->
+    <div class="tlw-card" id="tlw-receipt-card" style="display: none;">
+      <div class="tlw-receipt">
+        <div class="tlw-receipt-icon">✅</div>
+        <h3>Payment Successful!</h3>
+        <p id="tlw-receipt-date"></p>
+        <p id="tlw-receipt-ref"></p>
+        <p style="margin-top: 16px; color: #666; font-size: 0.9rem;">
+          Keep this receipt for your records.
+        </p>
+        <button class="tlw-btn tlw-btn-secondary" style="margin-top: 16px;" id="tlw-new-search">
+          🔍 Search Another Ticket
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Overlay (hidden by default) -->
+  <div id="tlw-loading" class="tlw-loading-overlay" style="display: none;">
+    <div class="tlw-loading-spinner"></div>
+  </div>
+
+  <script>
+    // Ticket Lookup Widget - Standalone JavaScript
+    (function() {
+      'use strict';
+
+      // Configuration - can be overridden via data attributes or window config
+      const config = {
+        apiUrl: window.TLW_API_URL || '/api',
+        defaultApiUrl: 'http://localhost:5000/api',
+        ...window.TLW_CONFIG
+      };
+
+      // Resolve API URL
+      function getApiUrl() {
+        // Check for data attribute on body
+        const bodyApiUrl = document.body.dataset.apiUrl;
+        if (bodyApiUrl) return bodyApiUrl;
+        
+        // Check config
+        if (config.apiUrl && config.apiUrl !== '/api') return config.apiUrl;
+        
+        // Check if we're on localhost, default to local backend
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+          return config.defaultApiUrl;
+        }
+        
+        // Use relative path (assumes API is on same domain)
+        return '/api';
+      }
+
+      // State
+      let currentTicket = null;
+
+      // DOM Elements
+      const elements = {
+        searchForm: document.getElementById('tlw-search-form'),
+        searchInput: document.getElementById('tlw-serial'),
+        searchBtn: document.getElementById('tlw-search-btn'),
+        searchCard: document.getElementById('tlw-search-card'),
+        ticketCard: document.getElementById('tlw-ticket-card'),
+        ticketInfo: document.getElementById('tlw-ticket-info'),
+        statusBadge: document.getElementById('tlw-status-badge'),
+        actions: document.getElementById('tlw-actions'),
+        alertContainer: document.getElementById('tlw-alert-container'),
+        loading: document.getElementById('tlw-loading'),
+        receiptCard: document.getElementById('tlw-receipt-card'),
+        newSearchBtn: document.getElementById('tlw-new-search')
+      };
+
+      // Sample ticket buttons
+      document.querySelectorAll('.tlw-sample-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          elements.searchInput.value = this.dataset.serial;
+          elements.searchInput.focus();
+        });
+      });
+
+      // Search form submit
+      elements.searchForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        await searchTicket();
+      });
+
+      // New search button
+      elements.newSearchBtn.addEventListener('click', function() {
+        resetToSearch();
+      });
+
+      // Keyboard navigation
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          clearSearch();
+        }
+      });
+
+      // Search ticket
+      async function searchTicket() {
+        const serialNumber = elements.searchInput.value.trim().toUpperCase();
+        
+        if (!serialNumber) {
+          showAlert('Please enter a ticket serial number', 'error');
+          return;
+        }
+
+        // Validate format (Letter + 6 digits)
+        if (!/^[A-Z][0-9]{6}$/.test(serialNumber)) {
+          showAlert('Invalid ticket format. Expected format: A459778 (Letter + 6 digits)', 'error');
+          return;
+        }
+
+        setLoading(true);
+        hideAlert();
+
+        try {
+          const apiUrl = getApiUrl();
+          const response = await fetch(`${apiUrl}/lookup/${serialNumber}`);
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.message || data.error || 'Ticket not found');
+          }
+
+          currentTicket = data.ticket;
+          displayTicket(currentTicket);
+          showAlert('✓ Ticket found successfully!', 'success');
+
+        } catch (error) {
+          showAlert(error.message || 'Failed to find ticket. Please try again.', 'error');
+          currentTicket = null;
+        } finally {
+          setLoading(false);
+        }
+      }
+
+      // Display ticket details
+      function displayTicket(ticket) {
+        // Update status badge
+        const statusClass = getStatusClass(ticket.status);
+        const statusText = ticket.status.toUpperCase();
+        elements.statusBadge.className = `tlw-status-badge ${statusClass}`;
+        elements.statusBadge.textContent = statusText;
+
+        // Build ticket info HTML
+        let html = `
+          <div class="tlw-amount-row">
+            <div class="tlw-amount-label">Fine Amount</div>
+            <div class="tlw-amount-value">$${ticket.fine_amount.toFixed(2)} BBD</div>
+          </div>
+          <div class="tlw-detail-row">
+            <span class="tlw-detail-label">Serial Number</span>
+            <span class="tlw-detail-value">${ticket.serial_number}</span>
+          </div>
+          <div class="tlw-detail-row">
+            <span class="tlw-detail-label">Service</span>
+            <span class="tlw-detail-value">${ticket.service?.name || 'N/A'}</span>
+          </div>
+          <div class="tlw-detail-row">
+            <span class="tlw-detail-label">Offence</span>
+            <span class="tlw-detail-value">${ticket.offence?.name || ticket.offense_description || 'N/A'}</span>
+          </div>
+          <div class="tlw-detail-row">
+            <span class="tlw-detail-label">Location</span>
+            <span class="tlw-detail-value">${ticket.location}</span>
+          </div>
+          <div class="tlw-detail-row">
+            <span class="tlw-detail-label">Vehicle Plate</span>
+            <span class="tlw-detail-value">${ticket.vehicle_plate}</span>
+          </div>
+          <div class="tlw-detail-row">
+            <span class="tlw-detail-label">Issue Date</span>
+            <span class="tlw-detail-value">${new Date(ticket.issue_date).toLocaleDateString()}</span>
+          </div>
+          <div class="tlw-detail-row">
+            <span class="tlw-detail-label">Due Date</span>
+            <span class="tlw-detail-value">${new Date(ticket.due_date).toLocaleDateString()}</span>
+          </div>
+        `;
+
+        // Add demerit points if applicable
+        if (ticket.points > 0) {
+          html += `
+            <div class="tlw-detail-row">
+              <span class="tlw-detail-label">Demerit Points</span>
+              <span class="tlw-detail-value" style="color: #dc3545; font-weight: bold;">${ticket.points} points</span>
+            </div>
+          `;
+        }
+
+        // Add repeat offence warning
+        if (ticket.is_repeat_offence) {
+          html += `
+            <div class="tlw-detail-row">
+              <span class="tlw-detail-label">Repeat Offence</span>
+              <span class="tlw-detail-value" style="color: #dc3545;">⚠️ Yes (${ticket.repeat_count} prior)</span>
+            </div>
+          `;
+        }
+
+        elements.ticketInfo.innerHTML = html;
+
+        // Build actions based on ticket status
+        let actionsHtml = '';
+        
+        if (ticket.status === 'paid') {
+          // Show receipt button
+          actionsHtml = `
+            <button class="tlw-btn tlw-btn-success" id="tlw-view-receipt">✅ View Receipt</button>
+          `;
+        } else if ((ticket.status === 'unpaid' || ticket.status === 'overdue' || ticket.status === 'Payable') && !ticket.court_required) {
+          // Show pay and challenge buttons
+          actionsHtml = `
+            <button class="tlw-btn tlw-btn-success" id="tlw-pay-btn">💳 Pay $${ticket.fine_amount.toFixed(2)} BBD</button>
+            <button class="tlw-btn tlw-btn-secondary" id="tlw-challenge-btn">⚖️ Challenge Ticket</button>
+          `;
+        } else if (ticket.court_required) {
+          // Show court info
+          showAlert('⚠️ This ticket requires court appearance. Payment not available online.', 'warning');
+        }
+
+        if (ticket.is_overdue && ticket.status !== 'paid') {
+          showAlert('⚠️ This ticket is OVERDUE! Additional penalties may apply.', 'warning');
+        }
+
+        elements.actions.innerHTML = actionsHtml;
+
+        // Attach event listeners to dynamic buttons
+        const payBtn = document.getElementById('tlw-pay-btn');
+        if (payBtn) {
+          payBtn.addEventListener('click', function() {
+            initiatePayment(ticket);
+          });
+        }
+
+        const challengeBtn = document.getElementById('tlw-challenge-btn');
+        if (challengeBtn) {
+          challengeBtn.addEventListener('click', function() {
+            alert('Challenge functionality would open here. In the full platform, this allows submitting a ticket challenge with evidence.');
+          });
+        }
+
+        const viewReceiptBtn = document.getElementById('tlw-view-receipt');
+        if (viewReceiptBtn) {
+          viewReceiptBtn.addEventListener('click', function() {
+            showReceipt(ticket);
+          });
+        }
+
+        // Show ticket card, hide search card
+        elements.searchCard.style.display = 'none';
+        elements.ticketCard.style.display = 'block';
+        elements.receiptCard.style.display = 'none';
+      }
+
+      // Initiate payment
+      async function initiatePayment(ticket) {
+        setLoading(true);
+
+        try {
+          const apiUrl = getApiUrl();
+          const response = await fetch(`${apiUrl}/spi/initiate/${ticket.serial_number}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              email: '',
+              billing_address: {}
+            })
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.message || 'Failed to initiate payment');
+          }
+
+          if (data.RedirectData) {
+            // Open HPP in new window/tab
+            const hppWindow = window.open('', '_blank');
+            
+            if (hppWindow) {
+              hppWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head><title>Secure Payment</title></head>
+                <body>
+                  <form id="hpp-form" action="${data.RedirectData.url || data.RedirectData}" method="POST">
+                    <input type="hidden" name="Data" value="${data.RedirectData.Data || ''}">
+                    <input type="hidden" name="Signature" value="${data.RedirectData.Signature || ''}">
+                    <p>Redirecting to secure payment...</p>
+                    <button type="submit">Continue to Payment</button>
+                  </form>
+                  <script>document.getElementById('hpp-form').submit();<\/script>
+                </body>
+                </html>
+              `);
+              hppWindow.document.close();
+            } else {
+              showAlert('Please allow popups to complete payment', 'error');
+            }
+          } else {
+            showAlert('Payment gateway not configured. Please contact support.', 'error');
+          }
+
+        } catch (error) {
+          showAlert(error.message || 'Failed to initiate payment', 'error');
+        } finally {
+          setLoading(false);
+        }
+      }
+
+      // Show receipt
+      function showReceipt(ticket) {
+        elements.searchCard.style.display = 'none';
+        elements.ticketCard.style.display = 'none';
+        elements.receiptCard.style.display = 'block';
+        
+        document.getElementById('tlw-receipt-date').textContent = 
+          `Payment Date: ${ticket.paid_date ? new Date(ticket.paid_date).toLocaleString() : 'N/A'}`;
+        document.getElementById('tlw-receipt-ref').textContent = 
+          `Reference: ${ticket.payment_reference || 'N/A'}`;
+      }
+
+      // Reset to search view
+      function resetToSearch() {
+        elements.searchCard.style.display = 'block';
+        elements.ticketCard.style.display = 'none';
+        elements.receiptCard.style.display = 'none';
+        clearSearch();
+        hideAlert();
+        currentTicket = null;
+      }
+
+      // Clear search
+      function clearSearch() {
+        elements.searchInput.value = '';
+        elements.searchInput.focus();
+      }
+
+      // Get status class
+      function getStatusClass(status) {
+        switch (status.toLowerCase()) {
+          case 'paid':
+            return 'tlw-status-paid';
+          case 'overdue':
+            return 'tlw-status-overdue';
+          case 'challenged':
+            return 'tlw-status-Challenged';
+          case 'payable':
+            return 'tlw-status-Payable';
+          default:
+            return 'tlw-status-unpaid';
+        }
+      }
+
+      // Show alert
+      function showAlert(message, type = 'info') {
+        const icon = type === 'success' ? '✅' : type === 'error' ? '❌' : type === 'warning' ? '⚠️' : 'ℹ️';
+        elements.alertContainer.innerHTML = `
+          <div class="tlw-alert tlw-alert-${type}">
+            <span class="tlw-alert-icon">${icon}</span>
+            <span>${message}</span>
+          </div>
+        `;
+      }
+
+      // Hide alert
+      function hideAlert() {
+        elements.alertContainer.innerHTML = '';
+      }
+
+      // Set loading state
+      function setLoading(isLoading) {
+        elements.loading.style.display = isLoading ? 'flex' : 'none';
+        elements.searchBtn.disabled = isLoading;
+        elements.searchInput.disabled = isLoading;
+      }
+
+      // Handle URL parameters for direct ticket lookup
+      function handleUrlParams() {
+        const params = new URLSearchParams(window.location.search);
+        const ticketParam = params.get('ticket');
+        if (ticketParam) {
+          elements.searchInput.value = ticketParam;
+          searchTicket();
+        }
+      }
+
+      // Initialize
+      document.addEventListener('DOMContentLoaded', function() {
+        handleUrlParams();
+      });
+
+      // Expose public API
+      window.TicketLookupWidget = {
+        search: searchTicket,
+        clear: clearSearch,
+        reset: resetToSearch,
+        config: config
+      };
+
+    })();
+  </script>
+</body>
+</html>
+
